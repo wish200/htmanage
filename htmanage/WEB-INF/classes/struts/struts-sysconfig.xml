@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="sysconfig" namespace="/sysconfig" extends="risk-struts-default">
+        <!-- 用户管理 -->
+		<action name="userManage_*" class="ccUserManageAction" method="{1}">
+			<result name="list">/jsp/sysconfig/user/userManage.jsp</result>
+			<result name="addForPage">/jsp/sysconfig//user/windAddUser.jsp</result>
+			<result name="save" type="redirect">/sysconfig/userManage_queryUserList.do</result>
+			<result name="updateForPage">/jsp/sysconfig//user/windEditUser.jsp</result>
+			<result name="edit" type="redirect">/sysconfig/userManage_queryUserList.do</result>
+			<result name="delete" type="redirect">/sysconfig/userManage_queryUserList.do</result>
+			<result name="searchForPage">/jsp/sysconfig/user/windSearchUser.jsp</result>
+		</action>
+	    <!-- 邮件模板管理 -->
+        <action name="emailTemplate_*" class="cdEmailTleAction" method="{1}">
+          <result name="list">/jsp/sysconfig/email/emailManage.jsp</result>
+          <result name="insertForPage">/jsp/sysconfig/email/emailAdd.jsp</result>
+          <result name="save" type="redirect">/sysconfig/emailTemplate_queryEmailTleForList.do</result>
+          <result name="addressForPage">/jsp/sysconfig/email/emailAddress.jsp</result>
+          <result name="delete" type="redirect">/sysconfig/emailTemplate_queryEmailTleForList.do</result>
+          <result name="edit" type="redirect">/sysconfig/emailTemplate_queryEmailTleForList.do</result>
+          <result name="view">/jsp/sysconfig/email/emailCheck.jsp</result>
+          <result name="editPage">/jsp/sysconfig/email/emailEdit.jsp</result>
+        </action>
+        <!--部门管理 -->
+        <action name="depManage_*" class="depManageAction" method="{1}">
+            <result name="editForPageVir">/jsp/sysconfig/departmentvir/departMentVirAdd.jsp</result>
+            <result name="editForPage">/jsp/sysconfig/department/addDepartment.jsp</result>
+            
+            <result name="save" type="redirect">/sysconfig/depManage_depList.do</result>
+            <result name="saveVir" type="redirect">/sysconfig/depManage_depVirList.do</result>
+            <result name="edit" type="redirect">/sysconfig/depManage_depList.do</result>
+            <result name="editVir" type="redirect">/sysconfig/depManage_depVirList.do</result>
+            
+            <result name="configureClassForPage">/jsp/sysconfig/department/configureDepClass.jsp</result>
+            <result name="configureChannelForPage">/jsp/sysconfig/department/configureDepChannel.jsp</result>
+            <result name="configureFictiDepForPage">/jsp/sysconfig/departmentvir/configureFictiDep.jsp</result>
+            
+            <result name="depList">/jsp/sysconfig/department/departManage.jsp</result>
+            <result name="depVirList">/jsp/sysconfig/departmentvir/departVirManage.jsp</result>
+            
+            <result name="configureFictiDep">/jsp/sysconfig/departmentvir/configureFictiDep.jsp</result>
+            <result name="configureChannel">/jsp/sysconfig/department/configureDepChannel.jsp</result>
+            <result name="delVir" type="redirect">/sysconfig/depManage_depVirList.do</result>
+        </action>
+         <!--部门岗位管理 -->
+        <action name="depPosMan_*" class="depPositionManageAction" method="{1}">
+            <result name="list">/jsp/sysconfig/depposition/depposManage.jsp</result>
+            <result name="editorForPage">/jsp/sysconfig/depposition/windCheckDeppos.jsp</result>
+            <result name="save" type="redirect">/sysconfig/depPosMan_getList.do</result>
+            <result name="edit" type="redirect">/sysconfig/depPosMan_getList.do</result>
+            
+            <result name="configureForPage">/jsp/sysconfig/depposition/windConfigDeppos.jsp</result>
+            <result name="configure" type="redirect">/sysconfig/depPosMan_getList.do</result>
+            <result name="searchForPage">/jsp/sysconfig/depposition/windSearchDeppos.jsp</result>
+        </action>
+         <!--系统公告管理 -->
+        <action name="sysPosMan_*" class="ccSystemPostAction" method="{1}">
+            <result name="list">/jsp/sysconfig/notice/noticeManage.jsp</result>
+            <result name="returnlist" type="redirect">/sysconfig/sysPosMan_getSystrmPoseList.do</result>
+            <result name="check" >/jsp/sysconfig/notice/noticeCheck.jsp</result>
+            <result name="editor" >/jsp/sysconfig/notice/noticeEdit.jsp</result>
+            <result name="updateSysPost" type="redirect">/sysconfig/sysPosMan_getSystrmPoseList.do</result>
+        </action>
+        <!--任务管理 -->
+        <action name="mytask_*" class="ccTaskManageAction" method="{1}">
+            <result name="list">/jsp/common/taskMore.jsp</result>
+        </action>
+        <action name="emailSend_*" class="emailSendRecordAction" method="{1}">
+             <result name="list">/jsp/sysconfig/emailSendRecor/emailSendRecorList.jsp</result>
+        </action>
+        <action name="emailSendView_*" class="emailSendAction" method="{1}">
+             <result name="list">/jsp/sysconfig/emailSend/emailSend.jsp</result>
+             <result name="addressForPage">/jsp/sysconfig/emailSend/chengUsers.jsp</result>
+        </action>
+	</package>
+</struts>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+    <!-- 公共模块 -->
+    <bean class="com.huiting.manage.action.common.NotFoundErrerAction" id="notFoundErrerAction" scope="prototype"></bean>
+    <bean class="com.huiting.manage.action.common.PublicJSPConditionsAction" id="publicJSPConditionsAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.common.CcUserLoginAction" id="ccUserLoginAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.common.CcMenuAction"  id="ccMenuAction" scope="prototype" />
+     <bean class="com.huiting.manage.action.common.DownLoadExeclFileAction"  id="downLoadExeclFileAction" scope="prototype" />
+    
+    
+    <bean class="com.huiting.manage.action.common.AttchMentAction"  id="attchMentAction" scope="prototype" />
+    <!--系统配置模块 -->
+    <!--  部门管理 -->
+    <bean class="com.huiting.manage.action.sysconfig.DepManageAction" id="depManageAction" scope="prototype" />
+    <!-- 部门岗位管理 -->
+    <bean class="com.huiting.manage.action.sysconfig.DepPositionManageAction" id="depPositionManageAction" scope="prototype" />
+    <!--人员管理 -->
+    <bean class="com.huiting.manage.action.sysconfig.CcUserManageAction" id="ccUserManageAction" scope="prototype" />
+    <!-- 邮件模板管理 -->
+    <bean class="com.huiting.manage.action.sysconfig.CdEmailTleAction" id="cdEmailTleAction" scope="prototype"/>	
+    <!-- 邮件发送 -->
+    <bean class="com.huiting.manage.action.sysconfig.EmailSendAction" id="emailSendAction" scope="prototype"/> 
+    <!--系统公告模块 -->
+    <bean class="com.huiting.manage.action.sysconfig.CcSystemPostAction"  id="ccSystemPostAction" scope="prototype" />
+    <!--我的任务模块 -->
+    <bean class="com.huiting.manage.action.sysconfig.CcTaskManageAction"  id="ccTaskManageAction" scope="prototype" />
+     <!--我的任务模块 -->
+    <bean class="com.huiting.manage.action.sysconfig.EmailSendRecordAction"  id="emailSendRecordAction" scope="prototype" />
+    
+	<!--应用模块 -->
+    <bean class="com.huiting.manage.action.app.AppActivityAction"  id="appActivityAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppChannelAction"  id="appChannelAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppProgramAction"  id="appProgramAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppPicbookAction"  id="appPicbookAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppAudioAction"  id="appAudioAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppHuibenAction"  id="appHuibenAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppAudioHuibenAction"  id="appAudioHuibenAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppPicHuibenAction"  id="appPicHuibenAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppCommentAction"  id="appCommentAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppFirstPageAction"  id="appFirstPageAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppFlowerAction"  id="appFlowerAction" scope="prototype" />
+    <bean class="com.huiting.manage.action.app.AppUserAction"  id="appUserAction" scope="prototype" />
+    
+</beans>

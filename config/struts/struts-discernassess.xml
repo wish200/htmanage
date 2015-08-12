@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<!--风险识别与评估模块-->
+	<package name="discernassess" namespace="/discernassess" extends="risk-struts-default">
+          <!--重大风险事件管理-->
+          <action name="mrm_*" class="majorRiskManageAction" method="{1}">
+             <result name="list">/newrisk/jsp/discernassess/majorRiskManage.jsp</result>
+             <result name="add">/newrisk/jsp/discernassess/majorRiskAdd.jsp</result> 
+             <result name="check">/newrisk/jsp/discernassess/majorRiskCheck.jsp</result> 
+             <result name="editor">/newrisk/jsp/discernassess/majorRiskEdit.jsp</result> 
+             <result name="delete" type="redirect">/discernassess/mrm_list.do</result>  
+             <result name="subBtn" type="redirect">/discernassess/mrm_list.do</result>  
+          </action>
+          
+          <!--压力测试、市场风险管理-->
+          <action name="pm_*" class="pressureMarketAction" method="{1}">
+             <result name="list">/newrisk/jsp/discernassess/pressure/pressureMarket.jsp</result>
+             <result name="addPage">/newrisk/jsp/discernassess/pressure/pressureMarketAdd.jsp</result>
+             <result name="editPage">/newrisk/jsp/discernassess/pressure/pressureMarketEdit.jsp</result> 
+             <result name="delete" type="redirect">/discernassess/pm_list.do</result>
+          </action>
+<!--           经济资本下面-市场风险 -->
+          <action name="em_*" class="marketAction" method="{1}">
+            <result name="list">/newrisk/jsp/discernassess/economic/market/marketList.jsp</result>
+            <result name="addPage">/newrisk/jsp/discernassess/economic/market/marketAdd.jsp</result>
+            <result name="editPage">/newrisk/jsp/discernassess/economic/market/marketEdit.jsp</result>
+            <result name="delete" type="redirect">/discernassess/em_getList.do</result>
+            <result name="lookView">/newrisk/jsp/discernassess/economic/market/marketLookView.jsp</result>
+          </action>
+          <!--经济资本下面-信用风险 -->
+           <action name="cr_*" class="creditAction" method="{1}">
+            <result name="list">/newrisk/jsp/discernassess/economic/credit/creditList.jsp</result>
+            <result name="addPage">/newrisk/jsp/discernassess/economic/credit/creditAdd.jsp</result>
+            <result name="editPage">/newrisk/jsp/discernassess/economic/credit/creditEdit.jsp</result>
+            <result name="delete" type="redirect">/discernassess/cr_list.do</result>
+            <result name="view">/newrisk/jsp/discernassess/economic/credit/creditView.jsp</result>
+          </action>
+          <!--   经济资本下面-操作风险 经济资本计量 -->
+          <action name="eo_*" class="economicAction" method="{1}">
+            <result name="list">/newrisk/jsp/discernassess/economic/oper/operList.jsp</result>
+            <result name="delete" type="redirect">/discernassess/eo_getList.do</result>
+            <result name="lookView">/newrisk/jsp/discernassess/economic/oper/operLook.jsp</result>
+            <result name="addPage">/newrisk/jsp/discernassess/economic/oper/operAdd.jsp</result>
+            <result name="editPage">/newrisk/jsp/discernassess/economic/oper/operEdit.jsp</result>
+          </action>
+          <action name="sr_*" class="statisReportAction" method="{1}">
+            <result name="queryPage">/newrisk/jsp/discernassess/economic/oper/statis/statisReport.jsp</result> 
+            <result name="pieChart">/newrisk/jsp/discernassess/economic/oper/statis/pieChartList.jsp</result>
+            <result name="coumnChart">/newrisk/jsp/discernassess/economic/oper/statis/coumnChartList.jsp</result>
+            <result name="waterfallChart">/newrisk/jsp/discernassess/economic/oper/statis/waterfallChartList.jsp</result>
+            <result name="msLineChart">/newrisk/jsp/discernassess/economic/oper/statis/msLineChartList.jsp</result>
+            <result name="hotSpotChart">/newrisk/jsp/discernassess/economic/oper/statis/hotSpotChartList.jsp</result>
+            <result name="matrix">/newrisk/jsp/discernassess/economic/oper/statis/matrixList.jsp</result>
+          </action>
+          <action name="es_*" class="ensembleAction" method="{1}">
+            <result name="list">/newrisk/jsp/discernassess/economic/ensemble/ensembleList.jsp</result>
+            <result name="addPage">/newrisk/jsp/discernassess/economic/ensemble/ensembleAdd.jsp</result>
+            <result name="view">/newrisk/jsp/discernassess/economic/ensemble/ensembleView.jsp</result>
+            <result name="add"  type="redirect">/discernassess/es_list.do</result>
+          </action>
+           <action name="is_*" class="insuranceAction" method="{1}">
+            <result name="list">/newrisk/jsp/discernassess/economic/insurance/insuranceList.jsp</result>
+            <result name="view">/newrisk/jsp/discernassess/economic/insurance/insuranceView.jsp</result>
+          </action>
+	</package>
+</struts>

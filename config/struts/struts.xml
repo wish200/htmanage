@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 是否为struts开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 默认的UI template主题 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 模板目录 -->
+	<constant name="struts.ui.templateDir" value="template" />
+	<!-- 设置模板类型. 可以为 ftl, vm, or jsp -->
+	<constant name="struts.ui.templateSuffix" value="ftl" />
+	<!-- 设置是否对freemarker的模板设置缓存,效果相当于把template拷贝到 WEB_APP/templates -->
+	<constant name="struts.freemarker.templatesCache" value="false" />
+	<!-- 默认的国际化地区信息 -->
+	<constant name="struts.locale" value="zh_CN" />
+	<!-- 国际化信息内码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- action的后缀 -->
+	<constant name="struts.action.extension" value="do" />
+	<!-- 加载附加的国际化属性文件（不包含.properties后缀）。可以增加多个properties文件的名称，使用逗号或者空格分割 -->
+	<constant name="struts.custom.i18n.resources" value="i18n/struts-messsages" />
+	<!-- ObjectFactory接口 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 指定当使用SpringObjectFactory时的自动装配逻辑.合法值包括: name, type, auto, 和 constructor 
+		(缺省为 name ) -->
+	<constant name="struts.objectFactory.spring.autoWire" value="name" />
+	<!-- 允许动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 是否国际化信息自动加载 -->
+	<constant name="struts.i18n.reload" value="false" />
+	<!-- 是否自动加载xml配置(true,false) -->
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<!-- 是否spring应该使用自身的cache -->
+	<!-- <constant name="struts.objectFactory.spring.useClassCache" value="true" 
+		/> -->
+	<constant name="struts.freemarker.templatesCache" value="false" />
+	<!-- 被 FilterDispatcher使用指定浏览器是否缓存静态内容，测试阶段设置为false，发布阶段设置为true -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- 是否struts过滤器应该提供静态内容 -->
+	<constant name="struts.serve.static" value="true" />
+	<!-- 是否不缓存XSLT模版 -->
+	<constant name="struts.xslt.nocache" value="false" />
+    <!-- 上传文件夹的大小设置 -->
+	<constant name="struts.multipart.maxSize" value="550000000" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<!-- 1、threadPriority:可选，指定线程的优先级，默认：Thread.NORM_PRIORITY 2、delay:可选，指定显示等待页面前初始的等待延迟时间，以毫秒为单位。默认没有等待延迟。 
+		3、delaySleepInterval：可选，只能和delay参数一起使用，指定检查后台进程是否执行完毕的时间间隔， 以毫秒为单位，默认为100毫秒。配置： -->
+	<package name="risk-struts-default" extends="struts-default" >
+		<interceptors>
+			<interceptor name="sessionOut"
+				class="com.huiting.manage.system.interceptor.SessionIterceptor">
+				<param name="includeMethods">login,logout</param>
+			</interceptor>
+			<!-- 配制默许的拦截器到拦截器栈 -->
+			<interceptor-stack name="riskStack">
+				<interceptor-ref name="sessionOut" />
+				<interceptor-ref name="defaultStack" />
+				<!--覆盖defultStack中的exception设置，启用它的日志功能 -->
+				<interceptor-ref name="exception">
+					<param name="logEnabled">true</param>
+					<param name="logLevel">error</param>
+				</interceptor-ref>
+				<!-- 引入拦截器,execAndWait拦截器必须在所有拦截器的最下面 <interceptor-ref name="execAndWait"> 
+					等待时间,执行时间没有超过此值,将不显示等待画面 (毫秒) <param name="delay">6000</param> 间隔检查时间,检查后台进程有没有执行完毕,如果完成了它就立刻返回,不用等到等待,用户不会看到等待画面 
+					<param name="delaySleepInterval">500</param> </interceptor-ref> -->
+			</interceptor-stack>
+		</interceptors>
+		<!-- 配置默认的拦截器 -->
+		<default-interceptor-ref name="riskStack" />
+		<default-action-ref name="notFound"></default-action-ref>
+
+		<global-results>
+			<result name="error">/jsp/error/globalException.jsp</result>
+			<result name="sqlError">/jsp/error/globalException.jsp</result>
+			<result name="wait">/jsp/common/wait.jsp</result>
+			<result name="login">/login.jsp</result>
+			<result name="logout">/logout.jsp</result>
+		</global-results>
+		
+		 <global-exception-mappings> 
+		      <exception-mapping result="sqlError" exception="java.sql.SQLException"/> 
+		      <exception-mapping result="error" exception="java.lang.Exception" />
+	     </global-exception-mappings>
+		<action name="notFound" class="notFoundErrerAction">
+			<result name="success">/jsp/error/404.jsp</result>
+		</action>
+
+	
+	</package>
+
+
+	<!-- 引入文件 -->
+	<include file="struts/struts-common.xml"></include>
+	<include file="struts/struts-sysconfig.xml"></include>
+	<include file="struts/struts-app.xml"></include>
+	
+	
+</struts>

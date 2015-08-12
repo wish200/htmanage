@@ -1,0 +1,1461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="baseMapper">
+	 <resultMap id="appActivityBaseDtoMap" type="appActivityBaseDto" >
+	    <id column="ActivityID" property="activityid" jdbcType="VARCHAR" />
+	    <result column="ActivityName" property="activityname" jdbcType="VARCHAR" />
+	    <result column="ActivityType" property="activitytype" jdbcType="VARCHAR" />
+	    <result column="ActivityDESC" property="activitydesc" jdbcType="VARCHAR" />
+	    <result column="ActivityPicURL" property="activitypicurl" jdbcType="VARCHAR" />
+	    <result column="ActivityTime" property="activitytime" jdbcType="TIMESTAMP" />
+	    <result column="ValidStatus" property="validstatus" jdbcType="VARCHAR" />
+     </resultMap>
+	 <resultMap id="appAudioBaseDtoMap" type="appAudioBaseDto" >
+	    <id column="AudioID" property="audioid" jdbcType="VARCHAR" />
+	    <result column="AudioName" property="audioname" jdbcType="VARCHAR" />
+	    <result column="AudioURL" property="audiourl" jdbcType="VARCHAR" />
+	    <result column="UserID" property="userid" jdbcType="VARCHAR" />
+	    <result column="NickName" property="nickname" jdbcType="VARCHAR" />
+	    <result column="AudioCatalog" property="audiocatalog" jdbcType="VARCHAR" />
+	    <result column="AudioSource" property="audiosource" jdbcType="VARCHAR" />
+	    <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+	    <result column="AudioStatus" property="audiostatus" jdbcType="VARCHAR" />
+	    <result column="FlowerCnt" property="flowercnt" jdbcType="INTEGER" />
+	    <result column="AudioLength" property="audiolength" jdbcType="VARCHAR" />
+	    <result column="AudioContent" property="audiocontent" jdbcType="VARCHAR" />
+	    <result column="BackGoundPic" property="backgoundpic" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="appChannelBaseDtoMap" type="appChannelBaseDto" >
+	    <id column="ChannelID" property="channelid" jdbcType="VARCHAR" />
+	    <result column="ChannelName" property="channelname" jdbcType="VARCHAR" />
+	    <result column="ChannelDesc" property="channeldesc" jdbcType="VARCHAR" />
+	    <result column="DJname" property="djname" jdbcType="VARCHAR" />
+	    <result column="DJdesc" property="djdesc" jdbcType="VARCHAR" />
+	    <result column="ProgramCnt" property="programcnt" jdbcType="INTEGER" />
+	    <result column="FlowerCnt" property="flowercnt" jdbcType="INTEGER" />
+	    <result column="FansCnt" property="fanscnt" jdbcType="INTEGER" />
+	    <result column="ChannelPic" property="channelpic" jdbcType="VARCHAR" />
+	    <result column="BackgroundPic" property="backgroundpic" jdbcType="VARCHAR" />
+	    <result column="Sort" property="sort" jdbcType="VARCHAR" />
+	    <result column="Status" property="status" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="appCommentBaseDtoMap" type="appCommentBaseDto" >
+	    <id column="CommentID" property="commentid" jdbcType="VARCHAR" />
+	    <result column="Modular" property="modular" jdbcType="VARCHAR" />
+	    <result column="BusiID" property="busiid" jdbcType="VARCHAR" />
+	    <result column="ConcernedUserID" property="concerneduserid" jdbcType="VARCHAR" />
+	    <result column="ConcernedNickName" property="concernednickname" jdbcType="VARCHAR" />
+	    <result column="ConcernedUserPic" property="concerneduserpic" jdbcType="VARCHAR" />
+	    <result column="CommentTime" property="commenttime" jdbcType="TIMESTAMP" />
+	    <result column="CommentText" property="commenttext" jdbcType="VARCHAR" />
+	    <result column="CommentStatus" property="commentstatus" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="appFirstPageBaseDtoMap" type="appFirstPageBaseDto" >
+	    <id column="ID" property="id" jdbcType="INTEGER" />
+	    <result column="PicUrl" property="picurl" jdbcType="VARCHAR" />
+	    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+	    <result column="Status" property="status" jdbcType="VARCHAR" />
+	  </resultMap>  
+	  <resultMap id="appFlowerBaseDtoMap" type="appFlowerBaseDto" >
+	    <result column="Modular" property="modular" jdbcType="VARCHAR" />
+	    <result column="BusiID" property="busiid" jdbcType="VARCHAR" />
+	    <result column="UserID" property="userid" jdbcType="VARCHAR" />
+	    <result column="NickName" property="nickname" jdbcType="VARCHAR" />
+	    <result column="FlowerCnt" property="flowercnt" jdbcType="INTEGER" />
+	    <result column="CommenTime" property="commentime" jdbcType="TIMESTAMP" />
+	  </resultMap>
+	  <resultMap id="appPicbookBaseDtoMap" type="appPicbookBaseDto" >
+    <id column="PicbookID" property="picbookid" jdbcType="VARCHAR" />
+    <result column="PicbookName" property="picbookname" jdbcType="VARCHAR" />
+    <result column="PicbookURL" property="picbookurl" jdbcType="VARCHAR" />
+    <result column="UserID" property="userid" jdbcType="VARCHAR" />
+    <result column="NickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="PicCatalog" property="piccatalog" jdbcType="VARCHAR" />
+    <result column="PicScene" property="picscene" jdbcType="VARCHAR" />
+    <result column="PicBookSource" property="picbooksource" jdbcType="VARCHAR" />
+    <result column="Uploadtime" property="uploadtime" jdbcType="TIMESTAMP" />
+    <result column="PicbookStatus" property="picbookstatus" jdbcType="VARCHAR" />
+    <result column="FlowerCnt" property="flowercnt" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="appProgramBaseDtoMap" type="appProgramBaseDto" >
+    <id column="ProgramID" property="programid" jdbcType="VARCHAR" />
+    <result column="ChannelID" property="channelid" jdbcType="VARCHAR" />
+    <result column="ProgramName" property="programname" jdbcType="VARCHAR" />
+    <result column="ProgramURL" property="programurl" jdbcType="VARCHAR" />
+    <result column="Duration" property="duration" jdbcType="VARCHAR" />
+    <result column="ProgramPic" property="programpic" jdbcType="VARCHAR" />
+    <result column="PlayCnt" property="playcnt" jdbcType="INTEGER" />
+    <result column="FlowerCnt" property="flowercnt" jdbcType="INTEGER" />
+    <result column="Sort" property="sort" jdbcType="VARCHAR" />
+    <result column="LoadTime" property="loadtime" jdbcType="TIMESTAMP" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="appUserBaseDtoMap" type="appUserBaseDto" >
+    <id column="UserID" property="userid" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="NickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="BirthDay" property="birthday" jdbcType="VARCHAR" />
+    <result column="Sex" property="sex" jdbcType="VARCHAR" />
+    <result column="RealName" property="realname" jdbcType="VARCHAR" />
+    <result column="PhoneNumber" property="phonenumber" jdbcType="VARCHAR" />
+    <result column="Weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="Mail" property="mail" jdbcType="VARCHAR" />
+    <result column="Province" property="province" jdbcType="VARCHAR" />
+    <result column="City" property="city" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="UserPic" property="userpic" jdbcType="VARCHAR" />
+    <result column="BackGroundPIC" property="backgroundpic" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>  
+  
+  <resultMap id="appAudioHuibenBaseDtoMap" type="appAudioHuibenBaseDto">
+    <id column="HuibenID" jdbcType="VARCHAR" property="huibenid" />
+    <result column="PicbookID" jdbcType="VARCHAR" property="picbookid" />
+    <result column="PicbookName" jdbcType="VARCHAR" property="picbookname" />
+    <result column="PicbookURL" jdbcType="VARCHAR" property="picbookurl" />
+    <result column="PicScene" jdbcType="VARCHAR" property="picscene" />
+    <result column="AudioID" jdbcType="VARCHAR" property="audioid" />
+    <result column="AudioName" jdbcType="VARCHAR" property="audioname" />
+    <result column="AudioURL" jdbcType="VARCHAR" property="audiourl" />
+    <result column="AudioLength" jdbcType="VARCHAR" property="audiolength" />
+    <result column="AudioContent" jdbcType="VARCHAR" property="audiocontent" />
+    <result column="UserID" jdbcType="VARCHAR" property="userid" />
+    <result column="NickName" jdbcType="VARCHAR" property="nickname" />
+    <result column="UserPic" jdbcType="VARCHAR" property="userpic" />
+    <result column="FlowerCnt" jdbcType="INTEGER" property="flowercnt" />
+    <result column="Status" jdbcType="VARCHAR" property="status" />
+    <result column="CommentCnt" jdbcType="INTEGER" property="commentcnt" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Flag" jdbcType="VARCHAR" property="flag" />
+  </resultMap>
+  <resultMap id="appHuibenBaseDtoMap" type="appHuibenBaseDto">
+    <id column="HuibenID" jdbcType="VARCHAR" property="huibenid" />
+    <result column="PicbookID" jdbcType="VARCHAR" property="picbookid" />
+    <result column="PicbookName" jdbcType="VARCHAR" property="picbookname" />
+    <result column="PicbookURL" jdbcType="VARCHAR" property="picbookurl" />
+    <result column="PicScene" jdbcType="VARCHAR" property="picscene" />
+    <result column="AudioID" jdbcType="VARCHAR" property="audioid" />
+    <result column="AudioName" jdbcType="VARCHAR" property="audioname" />
+    <result column="AudioURL" jdbcType="VARCHAR" property="audiourl" />
+    <result column="AudioLength" jdbcType="VARCHAR" property="audiolength" />
+    <result column="AudioContent" jdbcType="VARCHAR" property="audiocontent" />
+    <result column="UserID" jdbcType="VARCHAR" property="userid" />
+    <result column="NickName" jdbcType="VARCHAR" property="nickname" />
+    <result column="UserPic" jdbcType="VARCHAR" property="userpic" />
+    <result column="FlowerCnt" jdbcType="INTEGER" property="flowercnt" />
+    <result column="Status" jdbcType="VARCHAR" property="status" />
+    <result column="CommentCnt" jdbcType="INTEGER" property="commentcnt" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Flag" jdbcType="VARCHAR" property="flag" />
+  </resultMap>
+  <resultMap id="appPicHuibenBaseDtoMap" type="appPicHuibenBaseDto" >
+    <id column="HuibenID" property="huibenid" jdbcType="VARCHAR" />
+    <result column="PicbookID" property="picbookid" jdbcType="VARCHAR" />
+    <result column="PicbookName" property="picbookname" jdbcType="VARCHAR" />
+    <result column="PicbookURL" property="picbookurl" jdbcType="VARCHAR" />
+    <result column="PicScene" property="picscene" jdbcType="VARCHAR" />
+    <result column="AudioID" property="audioid" jdbcType="VARCHAR" />
+    <result column="AudioName" property="audioname" jdbcType="VARCHAR" />
+    <result column="AudioURL" property="audiourl" jdbcType="VARCHAR" />
+    <result column="AudioLength" property="audiolength" jdbcType="VARCHAR" />
+    <result column="AudioContent" property="audiocontent" jdbcType="VARCHAR" />
+    <result column="UserID" property="userid" jdbcType="VARCHAR" />
+    <result column="NickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="UserPic" property="userpic" jdbcType="VARCHAR" />
+    <result column="FlowerCnt" property="flowercnt" jdbcType="INTEGER" />
+    <result column="Status" property="status" jdbcType="VARCHAR" />
+    <result column="CommentCnt" property="commentcnt" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="Flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>  
+	  
+	  
+	  
+
+
+    <resultMap id="ccFacinputtrackChangeBaseDtoMap" type="ccFacinputtrackChangeBaseDto" >
+	    <result column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="NEWDEPCODE" property="newdepcode" jdbcType="VARCHAR" />
+	    <result column="EMAILSEND" property="emailsend" jdbcType="VARCHAR" />
+	  </resultMap>
+    <resultMap id="ccMailSendRecordBaseDtoMap" type="ccMailSendRecordBaseDto" >
+	    <result column="MODTYPE" property="modtype" jdbcType="VARCHAR" />
+	    <result column="EMAILDETAIL" property="emaildetail" jdbcType="CLOB"/>
+	    <result column="MAILID" property="mailid" jdbcType="VARCHAR" />
+	    <result column="ATTADRESS" property="attadress" jdbcType="VARCHAR" />
+	    <result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+	    <result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+	    <result column="SENDPERSON" property="sendperson" jdbcType="VARCHAR" />
+	    <result column="SENDDATE" property="senddate" jdbcType="TIMESTAMP" />
+	    <result column="EMAILTHE" property="emailthe" jdbcType="VARCHAR" />
+	  </resultMap>
+     <resultMap id="ccMailReceiverBaseDtoMap" type="ccMailReceiverBaseDto" >
+	    <result column="MAILID" property="mailid" jdbcType="VARCHAR" />
+	    <result column="SENDERID" property="senderid" jdbcType="VARCHAR" />
+	    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+	    <result column="USERTYPE" property="usertype" jdbcType="VARCHAR" />
+	  </resultMap>
+	 
+	<resultMap id="modTotalEcBaseDtoMap" type="modTotalEcBaseDto" >
+	   <result column="MOD_EC_INS" property="modEcIns" jdbcType="DECIMAL" />
+	   <result column="MOD_EC_CREDIT" property="modEcCredit" jdbcType="DECIMAL" />
+	   <result column="MOD_EC_BAZ" property="modEcBaz" jdbcType="DECIMAL" />
+	   <result column="MOD_EC_OPER" property="modEcOper" jdbcType="DECIMAL" />
+	   <result column="DISP_EFF" property="dispEff" jdbcType="DECIMAL" />
+	   <result column="MOD_EC_TOTAL" property="modEcTotal" jdbcType="DECIMAL" />
+	   <result column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	   <result column="QUANT" property="quant" jdbcType="DECIMAL" />
+	 </resultMap>
+	<resultMap id="modEcInsBaseDtoMap" type="modEcInsBaseDto" >
+	    <result column="VEHICLE_RISK_EC" property="vehicleRiskEc" jdbcType="DECIMAL" />
+	    <result column="VEHI_RES_EC" property="vehiResEc" jdbcType="DECIMAL" />
+	    <result column="VEHI_PRE_RES_EC" property="vehiPreResEc" jdbcType="DECIMAL" />
+	    <result column="PROP_PRE_EC" property="propPreEc" jdbcType="DECIMAL" />
+	    <result column="PROP_RES_EC" property="propResEc" jdbcType="DECIMAL" />
+	    <result column="PROP_PRE_RES_EC" property="propPreResEc" jdbcType="DECIMAL" />
+	    <result column="CARGO_PRE_EC" property="cargoPreEc" jdbcType="DECIMAL" />
+	    <result column="CARGO_RES_EC" property="cargoResEc" jdbcType="DECIMAL" />
+	    <result column="CARGO_PRE_RES_EC" property="cargoPreResEc" jdbcType="DECIMAL" />
+	    <result column="LIB_PRE_EC" property="libPreEc" jdbcType="DECIMAL" />
+	    <result column="LIB_RES_EC" property="libResEc" jdbcType="DECIMAL" />
+	    <result column="LIB_PRE_RES_EC" property="libPreResEc" jdbcType="DECIMAL" />
+	    <result column="AGR_PRE_EC" property="agrPreEc" jdbcType="DECIMAL" />
+	    <result column="AGR_RES_EC" property="agrResEc" jdbcType="DECIMAL" />
+	    <result column="AGR_PRE_RES_EC" property="agrPreResEc" jdbcType="DECIMAL" />
+	    <result column="CRE_PRE_EC" property="crePreEc" jdbcType="DECIMAL" />
+	    <result column="CRE_RES_EC" property="creResEc" jdbcType="DECIMAL" />
+	    <result column="CRE_PRE_RES_EC" property="crePreResEc" jdbcType="DECIMAL" />
+	    <result column="ACC_PRE_EC" property="accPreEc" jdbcType="DECIMAL" />
+	    <result column="ACC_RES_EC" property="accResEc" jdbcType="DECIMAL" />
+	    <result column="ACC_PRE_RES_EC" property="accPreResEc" jdbcType="DECIMAL" />
+	    <result column="TOTAL_PRE_EC" property="totalPreEc" jdbcType="DECIMAL" />
+	    <result column="TOTAL_RES_EC" property="totalResEc" jdbcType="DECIMAL" />
+	    <result column="TOTAL_PRE_RES_EC" property="totalPreResEc" jdbcType="DECIMAL" />
+	    <result column="CATA_RISK_EC" property="cataRiskEc" jdbcType="DECIMAL" />
+	    <result column="DISP_EFF" property="dispEff" jdbcType="DECIMAL" />
+	    <result column="OVERALL_INS_EC" property="overallInsEc" jdbcType="DECIMAL" />
+	    <result column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="QUANT" property="quant" jdbcType="DECIMAL" />
+	  </resultMap>
+	<resultMap id="creditRiskEcBaseDtoMap" type="CreditRiskEcBaseDto" >
+	    <id column="QUANT" property="quant" jdbcType="DECIMAL" />
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="ORI_INS_EC" property="oriInsEc" jdbcType="DECIMAL" />
+	    <result column="REIN_INS_EC" property="reinInsEc" jdbcType="DECIMAL" />
+	    <result column="INVERST_EC" property="inverstEc" jdbcType="DECIMAL" />
+	    <result column="OVERALL_EC" property="overallEc" jdbcType="DECIMAL" />
+	  </resultMap>
+     
+	  <resultMap id="AppIdxMainDepBaseDtoMap" type="AppIdxMainDepBaseDto" >
+	    <result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+	    <result column="MAINDEP_NAME" property="maindepName" jdbcType="VARCHAR" />
+	    <result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+	  </resultMap>
+     <resultMap id="modOperationRiskBaseDtoMap" type="modOperationRiskBaseDto" >
+	    <id column="SEQNO" property="seqno" jdbcType="VARCHAR" />
+	    <id column="EVENTNAME" property="eventname" jdbcType="VARCHAR" />
+	    <id column="INFOSOURCE" property="infosource" jdbcType="VARCHAR" />
+	    <id column="COMPANY" property="company" jdbcType="VARCHAR" />
+	    <id column="PROVINCIAL" property="provincial" jdbcType="VARCHAR" />
+	    <id column="MUNICIPAL" property="municipal" jdbcType="VARCHAR" />
+	    <id column="HAPPEN_TIME" property="happenTime" jdbcType="TIMESTAMP" />
+	    <id column="FOUND_TIME" property="foundTime" jdbcType="TIMESTAMP" />
+	    <id column="CLOSED_TIME" property="closedTime" jdbcType="TIMESTAMP" />
+	    <id column="EVENT_PERSON" property="eventPerson" jdbcType="VARCHAR" />
+	    <id column="LINKMAN" property="linkman" jdbcType="VARCHAR" />
+	    <id column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+	    <id column="EVENT_CONT" property="eventCont" jdbcType="VARCHAR" />
+	    <id column="FIND_PATH" property="findPath" jdbcType="VARCHAR" />
+	    <id column="EVENT_TYPE_PROP" property="eventTypeProp" jdbcType="VARCHAR" />
+	    <id column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+	    <id column="SEC_DEP_ID" property="secDepId" jdbcType="VARCHAR" />
+	    <id column="RISK_GENESIS" property="riskGenesis" jdbcType="VARCHAR" />
+	    <id column="FINANCIAL" property="financial" jdbcType="VARCHAR" />
+	    <id column="LEVEL_ONE" property="levelOne" jdbcType="VARCHAR" />
+	    <id column="LEVEL_COMPANY" property="levelCompany" jdbcType="VARCHAR" />
+	    <id column="LEVEL_CUSTOMER" property="levelCustomer" jdbcType="VARCHAR" />
+	    <id column="RELAT_RISK" property="relatRisk" jdbcType="VARCHAR" />
+	    <result column="SUPERVISION_AMT" property="supervisionAmt" jdbcType="DECIMAL" />
+	    <result column="ASSETS_AMT" property="assetsAmt" jdbcType="DECIMAL" />
+	    <result column="LAW_AMT" property="lawAmt" jdbcType="DECIMAL" />
+	    <result column="OUT_AMT" property="outAmt" jdbcType="DECIMAL" />
+	    <result column="FAILED_RECOVERY" property="failedRecovery" jdbcType="DECIMAL" />
+	    <result column="BUSI_INTERRUPT" property="busiInterrupt" jdbcType="DECIMAL" />
+	    <result column="PAPER_AMT" property="paperAmt" jdbcType="DECIMAL" />
+	    <result column="LOSS_AMOUNT" property="lossAmount" jdbcType="DECIMAL" />
+	    <result column="TOSAVE_AMT" property="tosaveAmt" jdbcType="DECIMAL" />
+	    <result column="LAST_AMT" property="lastAmt" jdbcType="DECIMAL" />
+	    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	  </resultMap>
+     <resultMap id="cdOperationReoprtBaseDtoMap" type="cdOperationReoprtBaseDto" >
+	    <id column="CD_CODE_LEV1" property="cdCodeLev1" jdbcType="VARCHAR" />
+	    <id column="CD_CODE_LEV2" property="cdCodeLev2" jdbcType="VARCHAR" />
+	    <result column="CD_NAME_LEV1" property="cdNameLev1" jdbcType="VARCHAR" />
+	    <result column="CD_NAME_LEV2" property="cdNameLev2" jdbcType="VARCHAR" />
+	  </resultMap>
+	 <resultMap id="modAppLoanBaseDtoMap" type="modAppLoanBaseDto" >
+		    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+		    <result column="CREDIT_RATING" property="creditRating" jdbcType="VARCHAR" />
+		    <result column="INTER_RATE_TYPE" property="interRateType" jdbcType="VARCHAR" />
+		    <result column="PAY_FREQ" property="payFreq" jdbcType="VARCHAR" />
+		    <result column="REAL_RATE" property="realRate" jdbcType="VARCHAR" />
+		    <result column="END_FACE_VALUE" property="endFaceValue" jdbcType="VARCHAR" />
+		    <result column="END_BOOK_VALUE" property="endBookValue" jdbcType="VARCHAR" />
+		    <result column="BANK" property="bank" jdbcType="VARCHAR" />
+		    <result column="DEADLINE" property="deadline" jdbcType="VARCHAR" />
+		    <result column="START_YEAR" property="startYear" jdbcType="VARCHAR" />
+		    <result column="START_MON" property="startMon" jdbcType="VARCHAR" />
+		    <result column="END_YEAR" property="endYear" jdbcType="VARCHAR" />
+		    <result column="END_MON" property="endMon" jdbcType="VARCHAR" />
+		    <result column="COUP_RATE" property="coupRate" jdbcType="VARCHAR" />
+		    <result column="ASSET_NAME" property="assetName" jdbcType="VARCHAR" />
+		    <result column="CLASSES" property="classes" jdbcType="VARCHAR" />
+     </resultMap>
+     <resultMap id="modEcOperJpgBaseDtoMap" type="modEcOperJpgBaseDto" >
+	    <result column="SEQNO" property="seqno" jdbcType="DECIMAL" />
+	    <result column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+     </resultMap>
+	<resultMap id="modOdsDepositBaseDtoMap" type="modOdsDepositBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <id column="PROD_NAME" property="prodName" jdbcType="VARCHAR" />
+	    <id column="ASSET_NAME" property="assetName" jdbcType="VARCHAR" />
+	    <id column="ASSET_TYPE" property="assetType" jdbcType="VARCHAR" />
+	    <id column="INTER_RATE_TYPE" property="interRateType" jdbcType="VARCHAR" />
+	    <id column="CREDIT_RATING" property="creditRating" jdbcType="VARCHAR" />
+	    <id column="INVEST_FLAG" property="investFlag" jdbcType="VARCHAR" />
+	    <id column="STARTDATE" property="startdate" jdbcType="VARCHAR" />
+	    <id column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+	    <id column="COUP_RATE" property="coupRate" jdbcType="DECIMAL" />
+	    <id column="BAZ_CODE" property="bazCode" jdbcType="VARCHAR" />
+	    <result column="END_VALUE" property="endValue" jdbcType="DECIMAL" />
+	    <result column="REAL_YIELD" property="realYield" jdbcType="DECIMAL" />
+	  </resultMap>
+	<resultMap id="modOdsCrBaseDtoMap" type="modOdsCrBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <id column="ASSET_NAME" property="assetName" jdbcType="VARCHAR" />
+	    <id column="INVEST_TYPE" property="investType" jdbcType="VARCHAR" />
+	    <id column="INTER_RATE_TYPE" property="interRateType" jdbcType="VARCHAR" />
+	    <id column="CREDIT_RATING" property="creditRating" jdbcType="VARCHAR" />
+	    <id column="INVEST_FLAG" property="investFlag" jdbcType="VARCHAR" />
+	    <id column="STARTDATE" property="startdate" jdbcType="VARCHAR" />
+	    <id column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+	    <id column="DEPOSIT_RATE" property="depositRate" jdbcType="DECIMAL" />
+	    <id column="DAYS_NEXT" property="daysNext" jdbcType="DECIMAL" />
+	    <id column="DAYS" property="days" jdbcType="DECIMAL" />
+	    <id column="BAZ_CODE" property="bazCode" jdbcType="VARCHAR" />
+	    <result column="END_VALUE" property="endValue" jdbcType="DECIMAL" />
+	    <result column="REAL_YIELD" property="realYield" jdbcType="DECIMAL" />
+	  </resultMap>
+	<resultMap id="modOdsBondBaseDtoMap" type="modOdsBondBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <id column="BOND_TYPE" property="bondType" jdbcType="VARCHAR" />
+	    <id column="INTER_RATE_TYPE" property="interRateType" jdbcType="VARCHAR" />
+	    <id column="HAVE_TYPE" property="haveType" jdbcType="VARCHAR" />
+	    <id column="CREDIT_RATING" property="creditRating" jdbcType="VARCHAR" />
+	    <id column="INVEST_FLAG" property="investFlag" jdbcType="VARCHAR" />
+	    <id column="STARTDATE" property="startdate" jdbcType="VARCHAR" />
+	    <id column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+	    <id column="NUMS_PAY" property="numsPay" jdbcType="DECIMAL" />
+	    <id column="DAYS_NEXT" property="daysNext" jdbcType="DECIMAL" />
+	    <id column="FACE_VALUE" property="faceValue" jdbcType="DECIMAL" />
+	    <id column="FACEVALUE" property="facevalue" jdbcType="DECIMAL" />
+	    <id column="DAYS" property="days" jdbcType="DECIMAL" />
+	    <id column="DAYS_HAVE" property="daysHave" jdbcType="DECIMAL" />
+	    <id column="BAZ_CODE" property="bazCode" jdbcType="VARCHAR" />
+	    <id column="COUP_RATE" property="coupRate" jdbcType="VARCHAR" />
+	    <id column="COST" property="cost" jdbcType="DECIMAL" />
+	    <result column="END_VALUE" property="endValue" jdbcType="DECIMAL" />
+	    <result column="REAL_RATE" property="realRate" jdbcType="DECIMAL" />
+	    <result column="REAL_RATE_HAVE" property="realRateHave" jdbcType="DECIMAL" />
+	  </resultMap>
+	<resultMap id="modAppDepositBaseDtoMap" type="modAppDepositBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <id column="ASSET_NAME" property="assetName" jdbcType="VARCHAR" />
+	    <id column="CLASSES" property="classes" jdbcType="VARCHAR" />
+	    <id column="DEPOSIT_PROP" property="depositProp" jdbcType="VARCHAR" />
+	    <id column="START_YEAR" property="startYear" jdbcType="VARCHAR" />
+	    <id column="START_MON" property="startMon" jdbcType="VARCHAR" />
+	    <id column="END_YEAR" property="endYear" jdbcType="VARCHAR" />
+	    <id column="END_MON" property="endMon" jdbcType="VARCHAR" />
+	    <id column="COUP_RATE" property="coupRate" jdbcType="VARCHAR" />
+	    <id column="INTER_RATE_TYPE" property="interRateType" jdbcType="VARCHAR" />
+	    <id column="ONETIME_PAY" property="onetimePay" jdbcType="VARCHAR" />
+	    <id column="PAY_FREQ" property="payFreq" jdbcType="VARCHAR" />
+	    <id column="REAL_RATE" property="realRate" jdbcType="VARCHAR" />
+	    <id column="END_FACE_VALUE" property="endFaceValue" jdbcType="VARCHAR" />
+	    <id column="END_BOOK_VALUE" property="endBookValue" jdbcType="VARCHAR" />
+	    <id column="BANK" property="bank" jdbcType="VARCHAR" />
+	    <id column="DEADLINE" property="deadline" jdbcType="VARCHAR" />
+	  </resultMap>
+	<resultMap id="modAppBondBaseDtoMap" type="modAppBondBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <id column="BOND_TYPE" property="bondType" jdbcType="VARCHAR" />
+	    <id column="INTER_RATE_TYPE" property="interRateType" jdbcType="VARCHAR" />
+	    <id column="HAVE_TYPE" property="haveType" jdbcType="VARCHAR" />
+	    <id column="CREDIT_RATING" property="creditRating" jdbcType="VARCHAR" />
+	    <id column="HAND_ACCOUNT" property="handAccount" jdbcType="VARCHAR" />
+	    <id column="START_YEAR" property="startYear" jdbcType="VARCHAR" />
+	    <id column="START_MON" property="startMon" jdbcType="VARCHAR" />
+	    <id column="END_YEAR" property="endYear" jdbcType="VARCHAR" />
+	    <id column="END_MON" property="endMon" jdbcType="VARCHAR" />
+	    <id column="COUP_RATE" property="coupRate" jdbcType="VARCHAR" />
+	    <id column="PAY_FREQ" property="payFreq" jdbcType="VARCHAR" />
+	    <id column="COST_PRICE" property="costPrice" jdbcType="VARCHAR" />
+	    <id column="FACEVALUE" property="facevalue" jdbcType="VARCHAR" />
+	    <id column="REAL_RATE" property="realRate" jdbcType="VARCHAR" />
+	    <id column="END_BOOK_VALUE" property="endBookValue" jdbcType="VARCHAR" />
+	    <id column="END_BAZ_VALUE" property="endBazValue" jdbcType="VARCHAR" />
+	  </resultMap>
+    <resultMap id="modEcCmBaseDtoMap" type="modEcCmBaseDto" >
+           <result column="RISKNAME" property="riskname" jdbcType="VARCHAR" />
+           <result column="X_COORD" property="xcoord" jdbcType="VARCHAR" />
+           <result column="Y_COORD" property="ycoord" jdbcType="VARCHAR" />
+           <result column="CORRELATION" property="correlation" jdbcType="VARCHAR" />
+    </resultMap>
+	 <resultMap id="modOdsStockBaseDtoMap" type="modOdsStockBaseDto">
+	    <id column="HAND_ACCOUNT" jdbcType="VARCHAR" property="handAccount" />
+	    <id column="STATDATE" jdbcType="VARCHAR" property="statdate" />
+	    <result column="HISTORIC_COST" jdbcType="VARCHAR" property="historicCost" />
+	    <result column="END_BOOK_VALUE" jdbcType="VARCHAR" property="endBookValue" />
+	  </resultMap>
+	  <resultMap id="modOdsRealtyBaseDtoMap" type="modOdsRealtyBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="HISTORIC_COST" property="historicCost" jdbcType="VARCHAR" />
+	    <result column="END_BOOK_VALUE" property="endBookValue" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="modOdsLteiBaseDtoMap" type="modOdsLteiBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="END_BOOK_VALUE" property="endBookValue" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="modOdsFundBaseDtoMap" type="modOdsFundBaseDto" >
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <id column="HAND_ACCOUNT" property="handAccount" jdbcType="VARCHAR" />
+	    <result column="END_BOOK_VALUE" property="endBookValue" jdbcType="VARCHAR" />
+	    <result column="HISTORIC_COST" property="historicCost" jdbcType="VARCHAR" />
+	    <result column="CLASSES" property="classes" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="modOdsCashBaseDtoMap" type="modOdsCashBaseDto" >
+	    <id column="CLASSES" property="classes" jdbcType="VARCHAR" />
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="END_BOOK_VALUE" property="endBookValue" jdbcType="VARCHAR" />
+	  </resultMap>
+       <resultMap id="modEcOperBaseDtoMap" type="modEcOperBaseDto" >
+	    <id column="QUANT" property="quant" jdbcType="DECIMAL" />
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="EC" property="ec" jdbcType="DECIMAL" />
+	    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="modCdTemplBaseDtoMap" type="modCdTemplBaseDto" >
+	    <id column="TEMPLATENAME" property="templatename" jdbcType="VARCHAR" />
+	    <id column="RISKCODE" property="riskcode" jdbcType="VARCHAR" />
+	    <id column="RISKNAME" property="riskname" jdbcType="VARCHAR" />
+	    <id column="templatenum" property="templatenum" jdbcType="VARCHAR" />
+	    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="modCdStatusBaseDtoMap" type="modCdStatusBaseDto" >
+	    <id column="FILLERCOM" property="fillercom" jdbcType="VARCHAR" />
+	    <id column="REPORTNAME" property="reportname" jdbcType="VARCHAR" />
+	    <id column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+	    <id column="REPORTCODE" property="reportcode" jdbcType="VARCHAR" />
+	    <result column="uptype" property="uptype" jdbcType="VARCHAR" />
+	    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+	    <result column="OPERATE" property="operate" jdbcType="VARCHAR" />
+	    <result column="INPUTDATE" property="inputdate" jdbcType="TIMESTAMP" />
+	    <result column="templatenum" property="templatenum" jdbcType="VARCHAR" />
+	    <result column="riskcode" property="riskcode" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap id="modEcBazBaseDtoMap" type="modEcBazBaseDto" >
+	    <result column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="EC_INTER_RATE" property="ecInterRate" jdbcType="DECIMAL" />
+	    <result column="EC_INTER_MARG" property="ecInterMarg" jdbcType="DECIMAL" />
+	    <result column="EC_EXCH_RATE" property="ecExchRate" jdbcType="DECIMAL" />
+	    <result column="EC_EQUIT_PRIC" property="ecEquitPric" jdbcType="DECIMAL" />
+	    <result column="EC_ESTAT_PRIC" property="ecEstatPric" jdbcType="DECIMAL" />
+	    <result column="DISP_EFF" property="dispEff" jdbcType="DECIMAL" />
+	    <result column="EC_TOT_BAZ" property="ecTotBaz" jdbcType="DECIMAL" />
+	    <result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	    <result column="QUANT" property="quant" jdbcType="DECIMAL" />
+	    <result column="EC_INTER_RATE_1" property="ecInterRate1" jdbcType="DECIMAL" />
+        <result column="EC_INTER_MARG_1" property="ecInterMarg1" jdbcType="DECIMAL" />
+        <result column="EC_EXCH_RATE_1" property="ecExchRate1" jdbcType="DECIMAL" />
+        <result column="EC_EQUIT_PRIC_1" property="ecEquitPric1" jdbcType="DECIMAL" />
+        <result column="EC_ESTAT_PRIC_1" property="ecEstatPric1" jdbcType="DECIMAL" />
+        <result column="DISP_EFF_1" property="dispEff1" jdbcType="DECIMAL" />
+        <result column="EC_TOT_BAZ_1" property="ecTotBaz1" jdbcType="DECIMAL" />
+	  </resultMap>
+	<resultMap id="modPtBazBaseDtoMap" type="modPtBazBaseDto" >
+	    <id column="PT_SCEN" property="ptScen" jdbcType="VARCHAR" />
+	    <id column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="PT_FACVALUE" property="ptFacvalue" jdbcType="VARCHAR" />
+	    <result column="CINA_BAZ" property="cinaBaz" jdbcType="DECIMAL" />
+	    <result column="CINA_BOOK" property="cinaBook" jdbcType="DECIMAL" />
+	    <result column="CINE_BAZ" property="cineBaz" jdbcType="DECIMAL" />
+	    <result column="CINE_PROFIT" property="cineProfit" jdbcType="DECIMAL" />
+	    <result column="CINE_OVR" property="cineOvr" jdbcType="DECIMAL" />
+	    <result column="SEQNO" property="seqno" jdbcType="DECIMAL" />
+	  </resultMap>
+    <resultMap id="cdReportTabBaseDtoMap" type="cdReportTabBaseDto" >
+	    <result column="TABLENAME" property="tablename" jdbcType="VARCHAR" />
+	    <result column="CLSNAME" property="clsname" jdbcType="VARCHAR" />
+	    <result column="CLSVIEW" property="clsview" jdbcType="VARCHAR" />
+	    <result column="CLSNO" property="clsno" jdbcType="DECIMAL" />
+     </resultMap>
+    
+     
+	 <resultMap id="cdregRiskBaseDtoMap" type="cdregRiskBaseDto" >
+	    <result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+	    <result column="REGINDEXCODE" property="regindexcode" jdbcType="VARCHAR" />
+	    <result column="REGINDEXNAME" property="regindexname" jdbcType="VARCHAR" />
+	    <result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	    <result column="RPT_TYPE" property="rptType" jdbcType="VARCHAR" />
+	    <result column="INDEXDESC" property="indexdesc" jdbcType="VARCHAR" />
+	  </resultMap>
+       <resultMap id="appAttSpecBaseDtoMap" type="appAttSpecBaseDto" >
+	    <result column="VFACCODE" property="vfaccode" jdbcType="VARCHAR" />
+	    <result column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+	    <result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+	    <result column="FACVALUE" property="facvalue" jdbcType="VARCHAR" />
+	    <result column="RATE" property="rate" jdbcType="VARCHAR" />
+	    <result column="FACNAME" property="facname" jdbcType="VARCHAR" />
+	  </resultMap>
+	   <resultMap id="cdAttFacBaseDtoMap" type="cdAttFacBaseDto" >
+		    <result column="ATTCODE" property="attcode" jdbcType="VARCHAR" />
+		    <result column="VFACCODE" property="vfaccode" jdbcType="VARCHAR" />
+		    <result column="MFACCODE" property="mfaccode" jdbcType="VARCHAR" />
+		    <result column="FACORDER" property="facorder" jdbcType="VARCHAR" />
+		    <result column="VFACNAME" property="vfacname" jdbcType="VARCHAR" />
+		    <result column="MFACNAME" property="mfacname" jdbcType="VARCHAR" />
+		    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		    <result column="BASEFACCODE" property="basefaccode" jdbcType="VARCHAR" />
+	  </resultMap>
+       
+	<resultMap id="ccTaskModuleBaseDtoMap" type="ccTaskModuleBaseDto" >
+	    <id column="modulecode" property="modulecode" jdbcType="VARCHAR" />
+	    <result column="modulename" property="modulename" jdbcType="VARCHAR" />
+	    <result column="moduleurl" property="moduleurl" jdbcType="VARCHAR" />
+	    <result column="moduleparm1" property="moduleparm1" jdbcType="VARCHAR" />
+	    <result column="moduleparm2" property="moduleparm2" jdbcType="VARCHAR" />
+	  </resultMap>
+	 <resultMap id="ccTaskBaseDtoMap" type="ccTaskBaseDto" >
+	    <id column="TASKCODE" property="taskcode" jdbcType="VARCHAR" />
+	    <result column="taskcontent" property="taskcontent" jdbcType="VARCHAR" />
+	    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+	    <result column="MODULECODE" property="modulecode" jdbcType="VARCHAR" />
+	    <result column="taskparam1" property="taskparam1" jdbcType="VARCHAR" />
+	    <result column="taskparam2" property="taskparam2" jdbcType="VARCHAR" />
+	    <result column="TASKSTATUS" property="taskstatus" jdbcType="VARCHAR" />
+	    <result column="comcode" property="comcode" jdbcType="VARCHAR" />
+	    <result column="newdepcode" property="newdepcode" jdbcType="VARCHAR" />
+	    <result column="deppositioncode" property="deppositioncode" jdbcType="VARCHAR" />
+	  </resultMap>
+	<resultMap id="appEvaluationBaseDtoMap" type="appEvaluationBaseDto" >
+	    <result column="INDEXNAME" property="indexname" jdbcType="VARCHAR" />
+	    <result column="INDEXVALUE" property="indexvalue" jdbcType="VARCHAR" />
+	    <result column="STATDATE" property="statdate" jdbcType="VARCHAR" />
+	    <result column="EVLINDEXCODE" property="evlindexcode" jdbcType="VARCHAR" />
+	    <result column="WEIGHTVALUE" property="weightvalue" jdbcType="VARCHAR" />
+	 </resultMap>
+	<resultMap id="cdIdxCatgoryBaseDtoMap" type="cdIdxCatgoryBaseDto" >
+	    <result column="IDXCATGORYCODE" property="idxcatgorycode" jdbcType="VARCHAR" />
+	    <result column="IDXCATGORYNAME" property="idxcatgoryname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="mppPerriskFactorBaseDtoMap" type="mppPerriskFactorBaseDto">
+		<result column="PERFACTOR" property="perfactor" jdbcType="VARCHAR" />
+		<result column="RISKFACCODE" property="riskfaccode" jdbcType="VARCHAR" />
+		<result column="FACNAME" property="facname" jdbcType="VARCHAR" />
+		<result column="RPT_TYPE" property="rptType" jdbcType="VARCHAR" />
+		<result column="FACTORDESC" property="factordesc" jdbcType="VARCHAR" />
+		<result column="USESUPERVISE" property="usesupervise" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="appFactorReportFillBaseDtoMap" type="appFactorReportFillBaseDto">
+		<result column="INDEXVALUE" property="indexvalue" jdbcType="DECIMAL" />
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="INDEXNAME" property="indexname" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="DATAFROM" property="datafrom" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="cdRiskReportBaseDtoMap" type="cdRiskReportBaseDto">
+		<result column="REPORTID" jdbcType="VARCHAR" property="reportid" />
+		<result column="REPORTCODE" jdbcType="VARCHAR" property="reportcode" />
+		<result column="REPORTTYPE" jdbcType="VARCHAR" property="reporttype" />
+		<result column="REPORTTITLE" jdbcType="VARCHAR" property="reporttitle" />
+		<result column="SUBMITDATE" jdbcType="TIMESTAMP" property="submitdate" />
+		<result column="SUBMITTOR" jdbcType="VARCHAR" property="submittor" />
+		<result column="ATTCHMENT" jdbcType="VARCHAR" property="attchment" />
+		<result column="STAUTS" jdbcType="VARCHAR" property="stauts" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="MODIFYDATE" jdbcType="TIMESTAMP" property="modifydate" />
+		<result column="COMCODE" jdbcType="VARCHAR" property="comcode" />
+		<result column="MODIFCODE" jdbcType="VARCHAR" property="modifcode" />
+	</resultMap>
+	<resultMap id="midDeterFactorBaseDtoMap" type="midDeterFactorBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="FACVALUE" property="facvalue" jdbcType="VARCHAR" />
+		<result column="FACDESC" property="facdesc" jdbcType="VARCHAR" />
+		<result column="FACTYPE" property="factype" jdbcType="VARCHAR" />
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="FILLERCODE" property="fillercode" jdbcType="VARCHAR" />
+		<result column="INPUTDATE" property="inputdate" jdbcType="TIMESTAMP" />
+		<result column="FILLERCOM" property="fillercom" jdbcType="VARCHAR" />
+		<result column="FACNAME" property="facname" jdbcType="VARCHAR" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="mvalidstate" property="mvalidstate" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="cdPeriodicaBaseDtoMap" type="cdPeriodicaBaseDto">
+		<id column="PERIODICAID" property="periodicaid" jdbcType="VARCHAR" />
+		<result column="PERIODICACODE" property="periodicacode"
+			jdbcType="VARCHAR" />
+		<result column="PERIODICATYPE" property="periodicatype"
+			jdbcType="VARCHAR" />
+		<result column="PERIODICATITLE" property="periodicatitle"
+			jdbcType="VARCHAR" />
+		<result column="SUBMITDATE" property="submitdate" jdbcType="TIMESTAMP" />
+		<result column="SUBMITTOR" property="submittor" jdbcType="VARCHAR" />
+		<result column="ATTCHMENT" property="attchment" jdbcType="VARCHAR" />
+		<result column="STAUTS" property="stauts" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="MODIFYDATE" property="modifydate" jdbcType="TIMESTAMP" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="MODIFCODE" property="modifcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="appGroupReportBaseDtoMap" type="appGroupReportBaseDto">
+		<id column="REPORTCODE" property="reportcode" jdbcType="VARCHAR" />
+		<id column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="GROUPINDCODE" property="groupindcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="appIndexViewBaseDtoMap" type="appIndexViewBaseDto">
+		<id column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<id column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<id column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<id column="CHANNELCODE" property="channelcode" jdbcType="VARCHAR" />
+		<id column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="DATAUNIT" jdbcType="VARCHAR" property="dataunit" />
+		<result column="INDEXVALUE" property="indexvalue" jdbcType="VARCHAR" />
+		<result column="LMONVALUE" property="lmonvalue" jdbcType="VARCHAR" />
+		<result column="LYEARVALUE" property="lyearvalue" jdbcType="VARCHAR" />
+		<result column="CTOLYEARVALUE" property="ctolyearvalue"
+			jdbcType="DECIMAL" />
+		<result column="CTOLMONVALUE" property="ctolmonvalue" jdbcType="VARCHAR" />
+		<result column="TIDE" property="tide" jdbcType="VARCHAR" />
+		<result column="COLOR" property="color" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="appMainEventBaseDtoMap" type="appMainEventBaseDto">
+		<id column="EVENTNAME" property="eventname" jdbcType="VARCHAR" />
+		<id column="comname" property="comname" jdbcType="VARCHAR" />
+		<id column="INFOSOURCE" property="infosource" jdbcType="VARCHAR" />
+		<id column="SUBMITTOR" property="submittor" jdbcType="VARCHAR" />
+		<id column="SUBTIME" property="subtime" jdbcType="TIMESTAMP" />
+		<id column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+		<id column="ACCURTIME" property="accurtime" jdbcType="VARCHAR" />
+		<id column="EVENTNO" property="eventno" jdbcType="VARCHAR" />
+		<result column="EVENTREASON" property="eventreason" jdbcType="CHAR" />
+		<result column="ESTLOSS" property="estloss" jdbcType="VARCHAR" />
+		<result column="MEASURES" property="measures" jdbcType="VARCHAR" />
+		<result column="OTHERS" property="others" jdbcType="VARCHAR" />
+		<result column="validstate" property="validstate" jdbcType="VARCHAR" />
+		<result column="newdepcode" property="newdepcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<resultMap id="ccAppClickStatTimeBaseDtoMap" type="ccAppClickStatTimeBaseDto">
+		<id column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<id column="LOGINTIME" property="logintime" jdbcType="TIMESTAMP" />
+		<result column="MODULEID" property="moduleid" jdbcType="DECIMAL" />
+		<result column="LOGOUTTIME" property="logouttime" jdbcType="TIMESTAMP" />
+		<result column="OPERATORTIME" property="operatortime" jdbcType="TIMESTAMP" />
+		<result column="SESSIONID" property="sessionid" jdbcType="VARCHAR" />
+		<result column="FLAG" property="flag" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccDepChannelBaseDtoMap" type="ccDepChannelBaseDto">
+		<result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+		<result column="CHANNELCODE" property="channelcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="DISABLEDATE" property="disabledate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="ccDepartmentBaseDtoMap" type="ccDepartmentBaseDto">
+		<result column="DEPNAME" property="depname" jdbcType="VARCHAR" />
+		<result column="DEPCATG" property="depcatg" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="comcode" property="comcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="NEWDEPCODE" property="newdepcode" jdbcType="VARCHAR" />
+		<result column="DEPKINDCODE" property="depkindcode" jdbcType="VARCHAR" />
+		<result column="DEPKINDNAME" property="depkindname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccDepIndexBaseDtoMap" type="ccDepIndexBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccDepPos2MenuBaseDtoMap" type="ccDepPos2MenuBaseDto">
+		<result column="DEPPOSITIONCODE" property="deppositioncode"
+			jdbcType="VARCHAR" />
+		<result column="MENUID" property="menuid" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccDepPositionBaseDtoMap" type="ccDepPositionBaseDto">
+		<result column="DEPPOSITIONCODE" property="deppositioncode"
+			jdbcType="VARCHAR" />
+		<result column="DEPPOSITIONNAME" property="deppositionname"
+			jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="POSREMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+		<result column="deppostype" property="deppostype" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ccDivBaseDtoMap" type="ccDivBaseDto">
+		<id column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<id column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccEmailTrackBaseDtoMap" type="ccEmailTrackBaseDto">
+		<result column="TEMPLATENUM" property="templatenum" jdbcType="VARCHAR" />
+		<result column="EMAILTHE" property="emailthe" jdbcType="VARCHAR" />
+		<result column="EMAILNUM" property="emailnum" jdbcType="VARCHAR" />
+		<result column="SENDDATE" property="senddate" jdbcType="TIMESTAMP" />
+		<result column="EMAILDETAIL" property="emaildetail" jdbcType="CLOB" />
+		<result column="INDEXCOLLECT" property="indexcollect" jdbcType="CLOB" />
+		<result column="RECEIVERS" property="receivers" jdbcType="CLOB" />
+		<result column="CCRECS" property="ccrecs" jdbcType="CLOB" />
+	</resultMap>
+
+	<resultMap id="ccEtlTrackBaseDtoMap" type="ccEtlTrackBaseDto">
+		<id column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="EXECTYPE" property="exectype" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccFacInPutTrackBaseDtoMap" type="ccFacInPutTrackBaseDto">
+		<id column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<id column="filltercom" property="filltercom" jdbcType="VARCHAR" />
+		<id column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="INPUTSTATE" property="inputstate" jdbcType="VARCHAR" />
+		<result column="INPUTDATE" property="inputdate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="ccIndexPowerBaseDtoMap" type="ccIndexPowerBaseDto">
+		<id column="POWERCODE" property="powercode" jdbcType="VARCHAR" />
+		<id column="POWERNAME" property="powername" jdbcType="VARCHAR" />
+		<id column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 菜单表 -->
+	<resultMap id="ccMenuBaseDtoMap" type="ccMenuBaseDto">
+		<result column="MENUID" property="menuid" jdbcType="VARCHAR" />
+		<result column="PARENTMENUID" property="parentmenuid" jdbcType="VARCHAR" />
+		<result column="MENUNAME" property="menuname" jdbcType="VARCHAR" />
+		<result column="MENULEVEL" property="menulevel" jdbcType="DECIMAL" />
+		<result column="DISPLAYNO" property="displayno" jdbcType="DECIMAL" />
+		<result column="HAVESUBMENU" property="havesubmenu" jdbcType="VARCHAR" />
+		<result column="VALIDSTATUS" property="validstatus" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="FLAG" property="flag" jdbcType="VARCHAR" />
+		<result column="MENUURL" property="menuurl" jdbcType="VARCHAR" />
+		<result column="fullmenuname" property="fullmenuname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccMenuPowerBaseDtoMap" type="ccMenuPowerBaseDto">
+		<id column="POWERCODE" property="powercode" jdbcType="VARCHAR" />
+		<id column="POWERNAME" property="powername" jdbcType="VARCHAR" />
+		<id column="MENUID" property="menuid" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccPositionMenuBaseDtoMap" type="ccPositionMenuBaseDto">
+		<result column="DEPPOSITIONCODE" property="deppositioncode"
+			jdbcType="VARCHAR" />
+		<result column="MENUID" property="menuid" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccRoleBaseDtoMap" type="ccRoleBaseDto">
+		<id column="ROLECODE" property="rolecode" jdbcType="VARCHAR" />
+		<id column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
+		<id column="POWERCODE_MENU" property="powercodeMenu" jdbcType="VARCHAR" />
+		<id column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<id column="POWERCODE_INDEX" property="powercodeIndex" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccSystemPostBaseDtoMap" type="ccSystemPostBaseDto">
+		<id column="SYSTEMCODE" property="systemcode" jdbcType="VARCHAR" />
+		<result column="enddate" property="enddate" jdbcType="TIMESTAMP" />
+		<result column="startdate" property="startdate" jdbcType="TIMESTAMP" />
+		<result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="POSTDESC" property="postdesc" jdbcType="VARCHAR" />
+		<result column="STYLEFLAG" property="styleflag" jdbcType="VARCHAR" />
+		<result column="ISNEWFLAG" property="isnewflag" jdbcType="VARCHAR" />
+		<result column="VALIDSTATUS" property="validstatus" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="FLAG" property="flag" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- cc_user 用户表 -->
+	<resultMap id="ccUserBaseDtoMap" type="ccUserBaseDto">
+		<result column="VALIDSTATUS" property="validstatus" jdbcType="VARCHAR" />
+		<result column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="INPUTDATE" property="inputdate" jdbcType="TIMESTAMP" />
+		<result column="FLAG" property="flag" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="RISKREMARK" property="riskremark" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+		<result column="LOGINTIMES" property="logintimes" jdbcType="INTEGER" />
+		<result column="DEPPOSITIONCODE" property="deppositioncode"
+			jdbcType="VARCHAR" />
+		<result column="NEWDEPCODE" property="newdepcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccUserClassBaseDtoMap" type="ccUserClassBaseDto">
+		<id column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<id column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccUserRoleBaseDtoMap" type="ccUserRoleBaseDto">
+		<id column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<id column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="IMPORTLEV" property="importlev" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ccUploadFilesBaseDtoMap" type="ccUploadFilesBaseDto">
+		<id column="FILEID" property="fileid" jdbcType="VARCHAR" />
+		<result column="FILEGROUPID" property="filegroupid" jdbcType="VARCHAR" />
+		<result column="MODULEID" property="moduleid" jdbcType="VARCHAR" />
+		<result column="UPLOADFILENAME" property="uploadfilename"
+			jdbcType="VARCHAR" />
+		<result column="UPLOADREALNAME" property="uploadrealname"
+			jdbcType="VARCHAR" />
+		<result column="UPLOADCONTENTTYPE" property="uploadcontenttype"
+			jdbcType="VARCHAR" />
+		<result column="SAVEPATH" property="savepath" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdChannelBaseDtoMap" type="cdChannelBaseDto">
+		<result column="CHANNELCODE" property="channelcode" jdbcType="VARCHAR" />
+		<result column="CHANNELNAME" property="channelname" jdbcType="VARCHAR" />
+		<result column="FATHERCODE" property="fathercode" jdbcType="VARCHAR" />
+		<result column="LEVELCODE" property="levelcode" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdClassBaseDtoMap" type="cdClassBaseDto">
+		<result column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<result column="CLASSNAME" property="classname" jdbcType="VARCHAR" />
+		<result column="FATHERCODE" property="fathercode" jdbcType="VARCHAR" />
+		<result column="LEVELCODE" property="levelcode" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdCompanyBaseDtoMap" type="cdCompanyBaseDto">
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="FATHERCODE" property="fathercode" jdbcType="VARCHAR" />
+		<result column="LEVELCODE" property="levelcode" jdbcType="VARCHAR" />
+		<result column="COMNAME" property="comname" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdDepRelationBaseDtoMap" type="cdDepRelationBaseDto">
+		<result column="NEWDEPCODE" property="newdepcode" jdbcType="VARCHAR" />
+		<result column="OLDDEPCODE" property="olddepcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdDepRiskBaseDtoMap" type="cdDepRiskBaseDto">
+		<result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+		<result column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="CREATEUSERCODE" property="createusercode"
+			jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="DISABLEDATE" property="disabledate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="cdDepVir2EntBaseDtoMap" type="cdDepVir2EntBaseDto">
+		<result column="VIRTUALDEPARTMENT" property="virtualdepartment"
+			jdbcType="VARCHAR" />
+		<result column="ENTITYDEPARTMENT" property="entitydepartment"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdEmailRecBaseDtoMap" type="cdEmailRecBaseDto">
+		<result column="TEMPLATENUM" property="templatenum" jdbcType="VARCHAR" />
+		<result column="RECNO" property="recno" jdbcType="VARCHAR" />
+		<result column="RECTYPE" property="rectype" jdbcType="VARCHAR" />
+		<result column="newdepcode" property="newdepcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdDataSourceBaseDtoMap" type="cdDataSourceBaseDto">
+		<result column="datasourcecode" property="datasourcecode"
+			jdbcType="VARCHAR" />
+		<result column="datasourcename" property="datasourcename"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdEmailTemplateBaseDtoMap" type="cdEmailTemplateBaseDto">
+		<result column="TEMPLATENUM" jdbcType="VARCHAR" property="templatenum" />
+		<result column="HEADOFTEMPL" jdbcType="VARCHAR" property="headoftempl" />
+		<result column="ENDOFTEMPL" jdbcType="VARCHAR" property="endoftempl" />
+		<result column="SIGNOFTEMPL" jdbcType="VARCHAR" property="signoftempl" />
+		<result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+		<result column="VALIDSTATE" jdbcType="VARCHAR" property="validstate" />
+		<result column="CREATEUSERCODE" jdbcType="VARCHAR" property="createusercode" />
+		<result column="TEMPLATENAME" jdbcType="VARCHAR" property="templatename" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="TEMPLATECATNO" jdbcType="VARCHAR" property="templatecatno" />
+		<result column="MODULEID" jdbcType="VARCHAR" property="moduleid" />
+		<result column="MODULENAME" jdbcType="VARCHAR" property="modulename" />
+		<result column="TEMPLATECATNAME" jdbcType="VARCHAR" property="templatecatname" />
+		<result column="COMCODE" jdbcType="VARCHAR" property="comcode" />
+		<result column="BODYOFTEMPL" property="bodyoftempl" jdbcType="CLOB" />
+	</resultMap>
+
+	<resultMap id="cdEvaluationBaseDtoMap" type="cdEvaluationBaseDto">
+		<result column="EVLINDEXCODE" property="evlindexcode" jdbcType="VARCHAR" />
+		<result column="EVLINDEXNAME" property="evlindexname" jdbcType="VARCHAR" />
+		<result column="EVLINDEXLEVEL" property="evlindexlevel"
+			jdbcType="VARCHAR" />
+		<result column="WEIGHT" property="weight" jdbcType="DECIMAL" />
+		<result column="INDEXDESC" property="indexdesc" jdbcType="VARCHAR" />
+		<result column="GRADEROLE" property="graderole" jdbcType="VARCHAR" />
+		<result column="evlindexorder" property="evlindexorder" jdbcType="INTEGER" />
+	    <result column="upevlindexcode" property="upevlindexcode" jdbcType="VARCHAR" />
+	    <result column="evlweightorder" property="evlweightorder" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="cdFactorBaseDtoMap" type="cdFactorBaseDto">
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="facdesc" property="facdesc" jdbcType="VARCHAR" />
+		<result column="indtype" property="indtype" jdbcType="VARCHAR" />
+		<result column="FACNAME" property="facname" jdbcType="VARCHAR" />
+		<result column="FETCHRATE" property="fetchrate" jdbcType="VARCHAR" />
+		<result column="fISCLASS" property="fisclass" jdbcType="VARCHAR" />
+		<result column="fISCOMPANY" property="fiscompany" jdbcType="VARCHAR" />
+		<result column="fISCHANNEL" property="fischannel" jdbcType="VARCHAR" />
+		<result column="INPUTDEP" property="inputdep" jdbcType="VARCHAR" />
+		<result column="USEVIEW" property="useview" jdbcType="VARCHAR" />
+		<result column="USEGROUP" property="usegroup" jdbcType="VARCHAR" />
+		<result column="USESUPERVISE" property="usesupervise" jdbcType="VARCHAR" />
+		<result column="GROUPCODE" property="groupcode" jdbcType="VARCHAR" />
+		<result column="SUPERVISECODE" property="supervisecode"
+			jdbcType="VARCHAR" />
+		<result column="CURM" property="curm" jdbcType="VARCHAR" />
+		<result column="CURT" property="curt" jdbcType="VARCHAR" />
+		<result column="CURQ" property="curq" jdbcType="VARCHAR" />
+		<result column="CURY" property="cury" jdbcType="VARCHAR" />
+		<result column="RB_12" property="rb12" jdbcType="VARCHAR" />
+		<result column="DATAFROMTYPE" property="datafromtype" jdbcType="VARCHAR" />
+		<result column="DATAFROM" property="datafrom" jdbcType="VARCHAR" />
+		<result column="idxcatgorycode" property="idxcatgorycode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdFactorMoreBaseDtoMap" type="cdFactorMoreBaseDto">
+		<result column="FACTORCODE" property="factorcode" jdbcType="VARCHAR" />
+		<result column="FACTORNAME" property="factorname" jdbcType="VARCHAR" />
+		<result column="UPDATEFRE" property="updatefre" jdbcType="VARCHAR" />
+		<result column="ISCOM" property="iscom" jdbcType="VARCHAR" />
+		<result column="ISRISK" property="isrisk" jdbcType="VARCHAR" />
+		<result column="ISCHA" property="ischa" jdbcType="VARCHAR" />
+		<result column="MORES" property="mores" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdGroupClassBaseDtoMap" type="cdGroupClassBaseDto">
+		<result column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<result column="GROUPCLASSCODE" property="groupclasscode"
+			jdbcType="VARCHAR" />
+		<result column="GROUPCLASSNAME" property="groupclassname"
+			jdbcType="VARCHAR" />
+		<result column="LEVELCODE" property="levelcode" jdbcType="DECIMAL" />
+		<result column="FATHERCODE" property="fathercode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdGroupCompanyBaseDtoMap" type="cdGroupCompanyBaseDto">
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="GROUPCOMNAME" property="groupcomname" jdbcType="VARCHAR" />
+		<result column="FATHERCODE" property="fathercode" jdbcType="VARCHAR" />
+		<result column="LEVELCODE" property="levelcode" jdbcType="DECIMAL" />
+		<result column="GROUPCOMCODE" property="groupcomcode" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdGroupIndexBaseDtoMap" type="cdGroupIndexBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="GROUPINDEXCODE" property="groupindexcode"
+			jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="FATHERCODE" property="fathercode" jdbcType="VARCHAR" />
+		<result column="LEVELCODE" property="levelcode" jdbcType="DECIMAL" />
+		<result column="GROUPINDEXNAME" property="groupindexname"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdIdxFacRelationBaseDtoMap" type="cdIdxFacRelationBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="cdIdxRangsBaseDtoMap" type="cdIdxRangsBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+	    <result column="comcode" property="comcode" jdbcType="VARCHAR" />
+		<result column="RL1" property="rl1" jdbcType="DECIMAL" />
+		<result column="YL1" property="yl1" jdbcType="DECIMAL" />
+		<result column="YH1" property="yh1" jdbcType="DECIMAL" />
+		<result column="GL1" property="gl1" jdbcType="DECIMAL" />
+		<result column="RH1" property="rh1" jdbcType="DECIMAL" />
+		<result column="GH1" property="gh1" jdbcType="DECIMAL" />
+		<result column="RL2" property="rl2" jdbcType="DECIMAL" />
+		<result column="RH2" property="rh2" jdbcType="DECIMAL" />
+		<result column="YL2" property="yl2" jdbcType="DECIMAL" />
+		<result column="YH2" property="yh2" jdbcType="DECIMAL" />
+		<result column="GL2" property="gl2" jdbcType="DECIMAL" />
+		<result column="GH2" property="gh2" jdbcType="DECIMAL" />
+		<result column="VPTACCORD" property="vptaccord" jdbcType="VARCHAR" />
+		<result column="RREMARK" property="rremark" jdbcType="VARCHAR" />
+		<result column="YREMARK" property="yremark" jdbcType="VARCHAR" />
+		<result column="GREMARK" property="gremark" jdbcType="VARCHAR" />
+		<result column="RWARNING" property="rwarning" jdbcType="VARCHAR" />
+		<result column="YWARNING" property="ywarning" jdbcType="VARCHAR" />
+		<result column="GWARNING" property="gwarning" jdbcType="VARCHAR" />
+		<result column="RLF1" property="rlf1" jdbcType="VARCHAR" />
+		<result column="RHF1" property="rhf1" jdbcType="VARCHAR" />
+		<result column="GLF1" property="glf1" jdbcType="VARCHAR" />
+		<result column="GHF1" property="ghf1" jdbcType="VARCHAR" />
+		<result column="YHF1" property="yhf1" jdbcType="VARCHAR" />
+		<result column="YLF1" property="ylf1" jdbcType="VARCHAR" />
+		<result column="RLF2" property="rlf2" jdbcType="VARCHAR" />
+		<result column="RHF2" property="rhf2" jdbcType="VARCHAR" />
+		<result column="GLF2" property="glf2" jdbcType="VARCHAR" />
+		<result column="GHF2" property="ghf2" jdbcType="VARCHAR" />
+		<result column="YLF2" property="ylf2" jdbcType="VARCHAR" />
+		<result column="YHF2" property="yhf2" jdbcType="VARCHAR" />
+		<result column="ISVALIDATE" property="isvalidate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdIdxRangsHisBaseDtoMap" type="cdIdxRangsHisBaseDto">
+		<id column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<id column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+		<id column="MODIFCODE" property="modifcode" jdbcType="VARCHAR" />
+		<result column="RL1" property="rl1" jdbcType="DECIMAL" />
+		<result column="YL1" property="yl1" jdbcType="DECIMAL" />
+		<result column="YH1" property="yh1" jdbcType="DECIMAL" />
+		<result column="GL1" property="gl1" jdbcType="DECIMAL" />
+		<result column="RH1" property="rh1" jdbcType="DECIMAL" />
+		<result column="GH1" property="gh1" jdbcType="DECIMAL" />
+		<result column="RL2" property="rl2" jdbcType="DECIMAL" />
+		<result column="RH2" property="rh2" jdbcType="DECIMAL" />
+		<result column="YL2" property="yl2" jdbcType="DECIMAL" />
+		<result column="YH2" property="yh2" jdbcType="DECIMAL" />
+		<result column="GL2" property="gl2" jdbcType="DECIMAL" />
+		<result column="GH2" property="gh2" jdbcType="DECIMAL" />
+		<result column="VPTACCORD" property="vptaccord" jdbcType="VARCHAR" />
+		<result column="RREMARK" property="rremark" jdbcType="VARCHAR" />
+		<result column="YREMARK" property="yremark" jdbcType="VARCHAR" />
+		<result column="GREMARK" property="gremark" jdbcType="VARCHAR" />
+		<result column="RWARNING" property="rwarning" jdbcType="VARCHAR" />
+		<result column="YWARNING" property="ywarning" jdbcType="VARCHAR" />
+		<result column="GWARNING" property="gwarning" jdbcType="VARCHAR" />
+		<result column="PASSTIME" property="passtime" jdbcType="TIMESTAMP" />
+		<result column="RLF1" property="rlf1" jdbcType="VARCHAR" />
+		<result column="RHF1" property="rhf1" jdbcType="VARCHAR" />
+		<result column="GLF1" property="glf1" jdbcType="VARCHAR" />
+		<result column="GHF1" property="ghf1" jdbcType="VARCHAR" />
+		<result column="YHF1" property="yhf1" jdbcType="VARCHAR" />
+		<result column="YLF1" property="ylf1" jdbcType="VARCHAR" />
+		<result column="RLF2" property="rlf2" jdbcType="VARCHAR" />
+		<result column="RHF2" property="rhf2" jdbcType="VARCHAR" />
+		<result column="GLF2" property="glf2" jdbcType="VARCHAR" />
+		<result column="GHF2" property="ghf2" jdbcType="VARCHAR" />
+		<result column="YLF2" property="ylf2" jdbcType="VARCHAR" />
+		<result column="YHF2" property="yhf2" jdbcType="VARCHAR" />
+		<result column="ISVALIDATE" property="isvalidate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdIndexAttBaseDtoMap" type="cdIndexAttBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="ATTCODE" property="attcode" jdbcType="VARCHAR" />
+		<result column="ATTNAME" property="attname" jdbcType="VARCHAR" />
+		<result column="ATTTYPE" property="atttype" jdbcType="VARCHAR" />
+		<result column="attfullname" property="attfullname" jdbcType="VARCHAR" />
+		<result column="FLAG" property="flag" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdIndexBaseDtoMap" type="cdIndexBaseDto">
+		<result column="INDEXNAME" jdbcType="VARCHAR" property="indexname" />
+		<result column="INDEXDESC" jdbcType="VARCHAR" property="indexdesc" />
+		<result column="INDMATCH" jdbcType="VARCHAR" property="indmatch" />
+		<result column="FETCHRATE" jdbcType="VARCHAR" property="fetchrate" />
+		<result column="VALIDSTATE" jdbcType="VARCHAR" property="validstate" />
+		<result column="IMPORTVALID" jdbcType="VARCHAR" property="importvalid" />
+		<result column="INDTYPE" jdbcType="VARCHAR" property="indtype" />
+		<result column="COMPARETYPE" jdbcType="VARCHAR" property="comparetype" />
+		<result column="INDEXWEIGHT" jdbcType="DECIMAL" property="indexweight" />
+		<result column="LEV1RISKCODE" jdbcType="VARCHAR" property="lev1riskcode" />
+		<result column="LEV1RISKNAME" jdbcType="VARCHAR" property="lev1riskname" />
+		<result column="LEV2RISKCODE" jdbcType="VARCHAR" property="lev2riskcode" />
+		<result column="LEV2RISKNAME" jdbcType="VARCHAR" property="lev2riskname" />
+		<result column="LEV3RISKNAME" jdbcType="VARCHAR" property="lev3riskname" />
+		<result column="LEV3RISKCODE" jdbcType="VARCHAR" property="lev3riskcode" />
+		<result column="DATAUNIT" jdbcType="VARCHAR" property="dataunit" />
+		<result column="INDEXCODE" jdbcType="VARCHAR" property="indexcode" />
+		<result column="RISKDESC" jdbcType="VARCHAR" property="riskdesc" />
+		<result column="VALLIDDATE" jdbcType="TIMESTAMP" property="valliddate" />
+		<result column="ISCLASSS" jdbcType="VARCHAR" property="isclasss" />
+		<result column="ISCOMPANY" jdbcType="VARCHAR" property="iscompany" />
+		<result column="ISCHANNEL" jdbcType="VARCHAR" property="ischannel" />
+		<result column="DATAFROMTYPE" jdbcType="VARCHAR" property="datafromtype" />
+		<result column="INPUTDEP" jdbcType="VARCHAR" property="inputdep" />
+		<result column="DATAFROM" jdbcType="VARCHAR" property="datafrom" />
+		<result column="INDMATCHDESC" jdbcType="VARCHAR" property="indmatchdesc" />
+		<result column="MAINDEPMENT" jdbcType="VARCHAR" property="maindepment" />
+		<result column="ISADDITION" jdbcType="VARCHAR" property="isaddition" />
+		<result column="TEGIME_BASE" jdbcType="VARCHAR" property="tegimeBase" />
+		<result column="VPTACCORD" jdbcType="VARCHAR" property="vptaccord" />
+		<result column="DEPARTMENT" jdbcType="VARCHAR" property="department" />
+		<result column="cenriskflag" jdbcType="VARCHAR" property="cenriskflag" />
+		<result column="proriskflag" jdbcType="VARCHAR" property="proriskflag" />
+		<result column="cenriskweight" jdbcType="DECIMAL" property="cenriskweight" />
+		<result column="proriskweight" jdbcType="DECIMAL" property="proriskweight" />
+		<result column="indexorder" jdbcType="INTEGER" property="indexorder" />
+		<result column="isviewlevel" jdbcType="VARCHAR" property="isviewlevel" />
+	</resultMap>
+
+	<resultMap id="cdIndexDutyBaseDtoMap" type="cdIndexDutyBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="MAINDEPMENT" property="maindepment" jdbcType="VARCHAR" />
+		<result column="P2ACCEPTROLE" property="p2acceptrole" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="VALLIDDATE" property="valliddate" jdbcType="TIMESTAMP" />
+		<result column="DISABLEDATE" property="disabledate" jdbcType="TIMESTAMP" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdIndexHisBaseDtoMap" type="cdIndexHisBaseDto">
+		<result column="INDEXNAME" property="indexname" jdbcType="VARCHAR" />
+		<result column="INDEXDESC" property="indexdesc" jdbcType="VARCHAR" />
+		<result column="INDMATCH" property="indmatch" jdbcType="VARCHAR" />
+		<result column="FETCHRATE" property="fetchrate" jdbcType="VARCHAR" />
+		<result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+		<result column="IMPORTVALID" property="importvalid" jdbcType="VARCHAR" />
+		<result column="INDTYPE" property="indtype" jdbcType="VARCHAR" />
+		<result column="COMPARETYPE" property="comparetype" jdbcType="VARCHAR" />
+		<result column="INDEXWEIGHT" property="indexweight" jdbcType="DECIMAL" />
+		<result column="LEV1RISKCODE" property="lev1riskcode" jdbcType="VARCHAR" />
+		<result column="LEV1RISKNAME" property="lev1riskname" jdbcType="VARCHAR" />
+		<result column="LEV2RISKCODE" property="lev2riskcode" jdbcType="VARCHAR" />
+		<result column="LEV2RISKNAME" property="lev2riskname" jdbcType="VARCHAR" />
+		<result column="LEV3RISKNAME" property="lev3riskname" jdbcType="VARCHAR" />
+		<result column="LEV3RISKCODE" property="lev3riskcode" jdbcType="VARCHAR" />
+		<result column="DATAUNIT" property="dataunit" jdbcType="VARCHAR" />
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="RISKDESC" property="riskdesc" jdbcType="VARCHAR" />
+		<result column="VALLIDDATE" property="valliddate" jdbcType="TIMESTAMP" />
+		<result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+		<result column="PASSTIME" property="passtime" jdbcType="TIMESTAMP" />
+		<result column="ISCLASSS" property="isclasss" jdbcType="VARCHAR" />
+		<result column="ISCOMPANY" property="iscompany" jdbcType="VARCHAR" />
+		<result column="ISCHANNEL" property="ischannel" jdbcType="VARCHAR" />
+		<result column="DATAFROMTYPE" property="datafromtype" jdbcType="VARCHAR" />
+		<result column="DATAFROM" property="datafrom" jdbcType="VARCHAR" />
+		<result column="INPUTDEP" property="inputdep" jdbcType="VARCHAR" />
+		<result column="MAINDEPMENT" property="maindepment" jdbcType="VARCHAR" />
+		<result column="INDMATCHDESC" property="indmatchdesc" jdbcType="VARCHAR" />
+		<result column="MODIFCODE" property="modifcode" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+		<result column="ISADDITION" property="isaddition" jdbcType="VARCHAR" />
+		<result column="TEGIME_BASE" property="tegimeBase" jdbcType="VARCHAR" />
+		<result column="VPTACCORD" property="vptaccord" jdbcType="VARCHAR" />
+		<result column="cenriskflag" jdbcType="VARCHAR" property="cenriskflag" />
+		<result column="proriskflag" jdbcType="VARCHAR" property="proriskflag" />
+		<result column="cenriskweight" jdbcType="DECIMAL" property="cenriskweight" />
+		<result column="proriskweight" jdbcType="DECIMAL" property="proriskweight" />
+		<result column="indexorder" jdbcType="INTEGER" property="indexorder" />
+		<result column="isviewlevel" jdbcType="VARCHAR" property="isviewlevel" />
+	</resultMap>
+
+	<resultMap id="cdIndexMathBaseDtoMap" type="cdIndexMathBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="INDEXMATCH" property="indexmatch" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<resultMap id="cdRegFactorBaseDtoMap" type="cdRegFactorBaseDto">
+		<result column="MAINDEPMENT" property="maindepment" jdbcType="VARCHAR" />
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="FACNAME" property="facname" jdbcType="VARCHAR" />
+		<result column="FACTORDESC" property="factordesc" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdRegFactorEvlBaseDtoMap" type="cdRegFactorEvlBaseDto">
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="EVLINDEXCODE" property="evlindexcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdRegFactorFillBaseDtoMap" type="cdRegFactorFillBaseDto">
+		<result column="FILLDATE" property="filldate" jdbcType="TIMESTAMP" />
+		<result column="FILLERCODE" property="fillercode" jdbcType="VARCHAR" />
+		<result column="FILLERCOM" property="fillercom" jdbcType="VARCHAR" />
+		<result column="FACVALUE" property="facvalue" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="cdRegFactorReportBaseDtoMap" type="cdRegFactorReportBaseDto">
+		<result column="FILLDATE" property="filldate" jdbcType="TIMESTAMP" />
+		<result column="FILLERCODE" property="fillercode" jdbcType="VARCHAR" />
+		<result column="MAINDEPMENT" property="maindepment" jdbcType="VARCHAR" />
+		<result column="FACVALUE" property="facvalue" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="cdReportBaseDtoMap" type="cdReportBaseDto">
+		<result column="REPORTCODE" property="reportcode" jdbcType="VARCHAR" />
+	    <result column="VALIDSTATE" property="validstate" jdbcType="VARCHAR" />
+	    <result column="REPORTNAME" property="reportname" jdbcType="VARCHAR" />
+	    <result column="DATATABNAME" property="datatabname" jdbcType="VARCHAR" />
+	    <result column="REPRATE" property="reprate" jdbcType="VARCHAR" />
+	    <result column="REPTYPE" property="reptype" jdbcType="VARCHAR" />
+	    <result column="tabletype" property="tabletype" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdRiskKindBaseDtoMap" type="cdRiskKindBaseDto">
+		<result column="RISKCODE" property="riskcode" jdbcType="VARCHAR" />
+		<result column="RISKNAME" property="riskname" jdbcType="VARCHAR" />
+		<result column="LEVELCODE" property="levelcode" jdbcType="VARCHAR" />
+		<result column="FATHERCODE" property="fathercode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdSource2TargetBaseDtoMap" type="cdSource2TargetBaseDto">
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="SOURCEDESC" property="sourcedesc" jdbcType="VARCHAR" />
+		<result column="JUDGEIDEN1" property="judgeiden1" jdbcType="VARCHAR" />
+		<result column="JUDGEIDEN2" property="judgeiden2" jdbcType="VARCHAR" />
+		<result column="JUDGEIDEN3" property="judgeiden3" jdbcType="VARCHAR" />
+		<result column="JUDGEDESC4" property="judgedesc4" jdbcType="VARCHAR" />
+		<result column="JUDGEIDEN5" property="judgeiden5" jdbcType="VARCHAR" />
+		<result column="JUDGEDESC1" property="judgedesc1" jdbcType="VARCHAR" />
+		<result column="JUDGEDESC2" property="judgedesc2" jdbcType="VARCHAR" />
+		<result column="JUDGEDESC3" property="judgedesc3" jdbcType="VARCHAR" />
+		<result column="JUDGEIDEN4" property="judgeiden4" jdbcType="VARCHAR" />
+		<result column="JUDGEDESC5" property="judgedesc5" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cdTemplateCatNoBaseDtoMap" type="cdTemplateCatNoBaseDto">
+		<result column="TEMPLATECATNO" jdbcType="VARCHAR" property="templatecatno" />
+		<result column="TEMPLATECATNAME" jdbcType="VARCHAR" property="templatecatname" />
+		<result column="VALIDSTATE" jdbcType="VARCHAR" property="validstate" />
+		<result column="LEVELCODE" jdbcType="DECIMAL" property="levelcode" />
+		<result column="FATHERCODE" jdbcType="VARCHAR" property="fathercode" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+
+	<resultMap id="etlLogBaseDtoMap" type="etlLogBaseDto">
+		<result column="PROC_NAME" property="procName" jdbcType="VARCHAR" />
+		<result column="ERR_CODE" property="errCode" jdbcType="DECIMAL" />
+		<result column="ERR_MESS" property="errMess" jdbcType="VARCHAR" />
+		<result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+		<result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="etlTestBaseDtoMap" type="etlTestBaseDto">
+		<result column="VALIDSTATUS" property="validstatus" jdbcType="VARCHAR" />
+		<result column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="INPUTDATE" property="inputdate" jdbcType="TIMESTAMP" />
+		<result column="FLAG" property="flag" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="CHAR" />
+	</resultMap>
+
+	<resultMap id="flowBackInforBaseDtoMap" type="flowBackInforBaseDto">
+		<result column="REASON1" property="reason1" jdbcType="VARCHAR" />
+		<result column="TASKCODE" property="taskcode" jdbcType="VARCHAR" />
+		<result column="REASON3" property="reason3" jdbcType="VARCHAR" />
+		<result column="REASON2" property="reason2" jdbcType="VARCHAR" />
+		<result column="REASON4" property="reason4" jdbcType="VARCHAR" />
+		<result column="BSTEP1" property="bstep1" jdbcType="VARCHAR" />
+		<result column="BSTEP2" property="bstep2" jdbcType="VARCHAR" />
+		<result column="BSTEP3" property="bstep3" jdbcType="VARCHAR" />
+		<result column="BSTEP4" property="bstep4" jdbcType="VARCHAR" />
+		<result column="BACKDATE" property="backdate" jdbcType="TIMESTAMP" />
+		<result column="BACKERCODE" property="backercode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="flowIndexCheckBaseDtoMap" type="flowIndexCheckBaseDto">
+		<id column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<id column="SUBTIME" property="subtime" jdbcType="TIMESTAMP" />
+		<result column="MODIFCODE" property="modifcode" jdbcType="VARCHAR" />
+		<result column="AUDITORVALID" property="auditorvalid" jdbcType="VARCHAR" />
+		<result column="AUDITORCODE" property="auditorcode" jdbcType="VARCHAR" />
+		<result column="AUDITORTIME" property="auditortime" jdbcType="TIMESTAMP" />
+		<result column="AUDITOPINION" property="auditopinion" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="flowIndexPushBaseDtoMap" type="flowIndexPushBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="PUSHSTATE" property="pushstate" jdbcType="VARCHAR" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="CHANNELCODE" property="channelcode" jdbcType="VARCHAR" />
+		<result column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<result column="COLOR" property="color" jdbcType="VARCHAR" />
+		<result column="INDEXVALUE" property="indexvalue" jdbcType="DECIMAL" />
+		<result column="hispushstate" property="hispushstate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="flowIndexTaskBaseDtoMap" type="flowIndexTaskBaseDto">
+		<id column="TASKCODE" property="taskcode" jdbcType="VARCHAR" />
+		<result column="CHANGESTATE" property="changestate" jdbcType="VARCHAR" />
+		<result column="BACKSTATE" property="backstate" jdbcType="VARCHAR" />
+		<result column="PUSHERCODE" property="pushercode" jdbcType="VARCHAR" />
+		<result column="PUSHDATE" property="pushdate" jdbcType="TIMESTAMP" />
+		<result column="ENDDATE" property="enddate" jdbcType="TIMESTAMP" />
+		<result column="lastupdate" property="lastupdate" jdbcType="TIMESTAMP" />
+		<result column="answerstate" property="answerstate" jdbcType="VARCHAR" />
+		<result column="PUSHADVISE" property="pushadvise" jdbcType="VARCHAR" />
+		<result column="BACKRATE" property="backrate" jdbcType="VARCHAR" />
+		<result column="BACKNUMS" property="backnums" jdbcType="DECIMAL" />
+		<result column="PUSHREQUIRE" property="pushrequire" jdbcType="VARCHAR" />
+		<result column="indexcode" property="indexcode" jdbcType="VARCHAR" />
+		<result column="statdate" property="statdate" jdbcType="VARCHAR" />
+		<result column="acceptorcode" property="acceptorcode" jdbcType="VARCHAR" />
+		<result column="channelcode" property="channelcode" jdbcType="VARCHAR" />
+		<result column="classcode" property="classcode" jdbcType="VARCHAR" />
+		<result column="comcode" property="comcode" jdbcType="VARCHAR" />
+		<result column="maindepmentcode" property="maindepmentcode"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="flowTaskIdxRelationBaseDtoMap" type="flowTaskIdxRelationBaseDto">
+		<id column="TASKCODE" property="taskcode" jdbcType="VARCHAR" />
+		<id column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<id column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="BACKNUMS" property="backnums" jdbcType="DECIMAL" />
+		<result column="LASTBACKDATE" property="lastbackdate" jdbcType="TIMESTAMP" />
+		<result column="LASTBACKERCODE" property="lastbackercode"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="flowTaskTrackBaseDtoMap" type="flowTaskTrackBaseDto">
+		<result column="BACKERCODE" property="backercode" jdbcType="VARCHAR" />
+		<result column="TASKCODE" property="taskcode" jdbcType="VARCHAR" />
+		<result column="BACKDATE" property="backdate" jdbcType="TIMESTAMP" />
+		<result column="STEP1" property="step1" jdbcType="VARCHAR" />
+		<result column="STEP2" property="step2" jdbcType="VARCHAR" />
+		<result column="STEP3" property="step3" jdbcType="VARCHAR" />
+		<result column="submitstatus" property="submitstatus" jdbcType="VARCHAR" />
+		<result column="STEP4" property="step4" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="midHandFactorBaseDtoMap" type="midHandFactorBaseDto">
+
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="filltercom" property="filltercom" jdbcType="VARCHAR" />
+		<result column="FILLERCODE" property="fillercode" jdbcType="VARCHAR" />
+		<result column="FACVALUE" property="facvalue" jdbcType="VARCHAR" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="INPUTDATE" property="inputdate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="midndexAmongBaseDtoMap" type="midndexAmongBaseDto">
+		<result column="INDEXCODE" property="indexcode" jdbcType="VARCHAR" />
+		<result column="INDEXVALUE" property="indexvalue" jdbcType="DECIMAL" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+		<result column="CHANNELCODE" property="channelcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="midSudoFactorBaseDtoMap" type="midSudoFactorBaseDto">
+		<result column="FACCODE" property="faccode" jdbcType="VARCHAR" />
+		<result column="STATDATE" property="statdate" jdbcType="TIMESTAMP" />
+		<result column="INPUTDATE" property="inputdate" jdbcType="TIMESTAMP" />
+		<result column="FILLERCODE" property="fillercode" jdbcType="VARCHAR" />
+		<result column="FACVALUE" property="facvalue" jdbcType="VARCHAR" />
+		<result column="DATAFROM" property="datafrom" jdbcType="VARCHAR" />
+		<result column="COMCODE" property="comcode" jdbcType="VARCHAR" />
+		<result column="CHANNELCODE" property="channelcode" jdbcType="VARCHAR" />
+		<result column="CLASSCODE" property="classcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+</mapper>

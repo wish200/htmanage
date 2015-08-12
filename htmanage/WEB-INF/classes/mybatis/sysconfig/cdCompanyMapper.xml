@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cdCompanyMapper">
+<!--	<resultMap type="cdClassDto" id="cdClassDtoMap"-->
+<!--		extends="baseMapper.cdClassBaseDtoMap">-->
+<!--		<result column="checked" property="checked" jdbcType="VARCHAR" />-->
+<!--	</resultMap>-->
+	<!--查询机构表List-->
+	<select id="selectList" parameterType="Map" resultType="CdCompanyDto">
+		select * from cd_company c
+		where 1=1
+		  <if test="searchDto!=null and searchDto.levelCode!=null and searchDto.levelCode!=''">
+		      and c.levelcode=#{searchDto.levelCode}
+		  </if>
+		      and c.remark is null
+		 order by comcode, fathercode
+	</select>
+	<select id="selectOne" parameterType="Map" resultType="CdCompanyDto">
+	   SELECT * FROM cd_company w where w.comcode=#{searchDto.comCode}
+	</select>
+</mapper>

@@ -1,0 +1,10 @@
+*{ margin:0; padding:0;}
+html{ height:100%; background: url(../../images/loginBg.png) 0 -50px repeat-x;}
+body{ height:100%; background:url(../../images/loginBg.jpg) center -55px no-repeat; min-width:980px;}
+.login{ width:980px; margin:0 auto; min-height:650px;}
+.login dl{ width:247px; height:220px; background:url(../../images/login.png) 0 -10px no-repeat; float:left; margin:226px 0 0 600px; display:inline;}
+.login dl dd{ width:247px; height:45px; margin-left:5px;margin-top:17px;}
+.login dl dt{ margin-top:24px;}
+.login .text{ width:195px; height:28px; line-height:28px; color:#333; font-size:12px; border:0; margin:6px 0 0 40px; background:none;}
+.login .bgfff{ background:#fff;}
+.login .btnLogin{ width:246px; height:60px; border:0; cursor:pointer; background:none;}

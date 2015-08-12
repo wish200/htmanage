@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="appChannelDaoMapper">
+	<insert id="insert" parameterType="List">
+		insert into t_channel 
+		(ChannelID, ChannelName, ChannelDesc,   DJname, DJdesc, ProgramCnt,  FlowerCnt, FansCnt, ChannelPic,  BackgroundPic, Sort, Status )
+		 values (#{channelid,jdbcType=VARCHAR}, #{channelname,jdbcType=VARCHAR}, #{channeldesc,jdbcType=VARCHAR}, 
+         #{djname,jdbcType=VARCHAR}, #{djdesc,jdbcType=VARCHAR}, #{programcnt,jdbcType=INTEGER}, 
+         #{flowercnt,jdbcType=INTEGER}, #{fanscnt,jdbcType=INTEGER}, #{channelpic,jdbcType=VARCHAR}, 
+         #{backgroundpic,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+         )
+      </insert>
+      
+    <select id="selectMaxId" resultType="String">
+        select max(ChannelID) from t_channel
+    </select>
+<!--     选择一条数据 -->
+    <select id="selectOne" parameterType="Map" resultMap="baseMapper.appChannelBaseDtoMap">
+        select 
+       ChannelID, ChannelName, ChannelDesc, DJname, DJdesc, ProgramCnt, FlowerCnt, FansCnt, 
+       ChannelPic, BackgroundPic, Sort, Status from t_channel
+       <where>
+        channelid=#{searchDto.channelid,jdbcType=VARCHAR}
+       </where>
+    </select>
+<!--     查找多条数据-->
+    <select id="selectList" parameterType="Map" resultMap="baseMapper.appChannelBaseDtoMap">
+       
+        select 
+       ChannelID, ChannelName, ChannelDesc, DJname, DJdesc, ProgramCnt, FlowerCnt, FansCnt, 
+       ChannelPic, BackgroundPic, Sort, Status from t_channel
+       <where>
+	       <trim prefixOverrides="and">
+	       		<if test="searchDto.channelid!=null and searchDto.channelid!=''">
+		          and  channelid =#{searchDto.channelid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.channelname!=null and searchDto.channelname!=''">
+		          and  channelname like CONCAT('%',#{searchDto.channelname,jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="searchDto.validstate!=null and searchDto.validstate!=''">  
+		         	and status =#{searchDto.status,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+       <if test="searchDto.page!=null">
+          limit  #{searchDto.page.startIndex}, #{searchDto.page.pageSize}
+       </if>
+    </select>
+<!--     更新一条数据 -->
+    <update id="update" parameterType="appChannelBaseDto">
+        update t_channel
+              set 
+              <trim suffixOverrides=",">
+	          <if test="channelname!=null and channelname!=''">
+	           channelname = #{channelname,jdbcType=VARCHAR},
+	          </if>
+	          <if test="channeldesc!=null and channeldesc!=''">
+	           channeldesc = #{channeldesc,jdbcType=VARCHAR},
+	          </if>  
+	          <if test="djname!=null and djname!=''">
+	             djname =  #{djname,jdbcType=VARCHAR},
+	          </if> 
+	          <if test="djdesc!=null and djdesc!=''">
+	             djdesc =  #{djdesc,jdbcType=VARCHAR},
+	          </if> 
+	          <if test="programcnt!=null and programcnt!=''">
+	             programcnt =  #{programcnt,jdbcType=INTEGER},
+	          </if> 
+	          <if test="flowercnt!=null and flowercnt!=''">
+	             flowercnt =  #{flowercnt,jdbcType=INTEGER},
+	          </if> 
+	          <if test="fanscnt!=null and fanscnt!=''">
+	             fanscnt =  #{fanscnt,jdbcType=INTEGER},
+	          </if> 
+	          <if test="channelpic!=null and channelpic!=''">
+	            channelpic =#{channelpic,jdbcType=VARCHAR},
+	          </if> 
+	          <if test="backgroundpic!=null and backgroundpic!=''">
+	            backgroundpic =#{backgroundpic,jdbcType=VARCHAR},
+	          </if>  
+			  <if test="sort!=null and sort!=''">
+	            sort =#{sort,jdbcType=VARCHAR},
+	          </if>
+	          <if test="status!=null and status!=''">
+	            status =#{status,jdbcType=VARCHAR},
+	          </if>   
+          </trim>         
+            where    channelid = #{channelid,jdbcType=VARCHAR}
+    </update>
+<!--     删除已条数据 -->
+    <delete id="deleteById" parameterType="appChannelBaseDto">
+       delete from  t_channel  where channelid=#{channelid,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="count" parameterType="Map" resultType="int">
+        select count(*) from  t_channel
+         <where>
+            <trim prefixOverrides="and">
+	       		<if test="searchDto.channelid!=null and searchDto.channelid!=''">
+		          and  channelid =#{searchDto.channelid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.channelname!=null and searchDto.channelname!=''">
+		          and  channelname like CONCAT('%',#{searchDto.channelname,jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="searchDto.validstate!=null and searchDto.validstate!=''">  
+		         	and status =#{searchDto.status,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+        
+       
+       
+    </select>
+</mapper>

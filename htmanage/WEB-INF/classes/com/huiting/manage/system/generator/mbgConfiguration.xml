@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
+	<!--<classPathEntry location="E:\cc\ojdbc6.jar" />
+
+	-->
+	<classPathEntry location="D:\Workspaces\htmanage\htmanage\WEB-INF\lib\mysql-connector-java-5.1.22-bin.jar" />
+	<context id="yihaomen_mysql_tables" targetRuntime="MyBatis3">
+
+		<!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!-- 注释控制完毕 -->
+
+		<!-- 数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/huiting" userId="root"
+			password="123456">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 数据表对应的model 层 -->
+		<javaModelGenerator targetPackage="com.huiting.manage.dto.base"
+			targetProject="src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- sql mapper 隐射配置文件 -->
+		<sqlMapGenerator targetPackage="com.huiting.manage.mapper"
+			targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.huiting.manage.dao" targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 要对那些数据表进行生成操作，必须要有一个. enableCountByExample="false" enableUpdateByExample="false" 
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" -->
+
+		<table tableName="CC_APPCLICKSTATTIME" domainObjectName="CcAppClickStatTimeBaseDto" />
+		
+		<table tableName="CC_APPCLICKSTATTIME" domainObjectName="CcAppClickStatTimeBaseDto" />
+		<table tableName="CC_DIV" domainObjectName="CcDivBaseDto" />
+		<table tableName="CC_ETLTRACK" domainObjectName="CcEtlTrackBaseDto" />
+		<table tableName="CC_FACINPUTTRACK" domainObjectName="CcFacInPutTrackBaseDto" />
+		<table tableName="CC_SYSTEMPOST" domainObjectName="CcSystemPostBaseDto" />
+		<table tableName="CC_INDEXPOWER" domainObjectName="CcIndexPowerBaseDto" />
+		<table tableName="CC_MENUPOWER" domainObjectName="CcMenuPowerBaseDto" />
+		<table tableName="CC_ROLE" domainObjectName="CcRoleBaseDto" />
+		<table tableName="CC_USERCLASS" domainObjectName="CcUserClassBaseDto" />
+		<table tableName="CC_USERROLE" domainObjectName="CcUserRoleBaseDto" />
+		<table tableName="CC_USER" domainObjectName="CcUserBaseDto" />
+		<table tableName="CC_DEPPOSITION" domainObjectName="CcDepPositionBaseDto" />
+		<table tableName="CC_DEP_POS2MENU" domainObjectName="CcDepPos2MenuBaseDto" />
+		<table tableName="CC_DEPINDEX" domainObjectName="CcDepIndexBaseDto" />
+		<table tableName="CC_DEPRISK" domainObjectName="CdDepRiskBaseDto" />
+		<table tableName="CC_DEPCHANNEL" domainObjectName="CcDepChannelBaseDto" />
+		<table tableName="CC_EMAIL_TRACK" domainObjectName="CcEmailTrackBaseDto" />
+		<table tableName="CC_MENU" domainObjectName="CcMenuBaseDto" />
+		<table tableName="CC_POSITIONMENU" domainObjectName="CcPositionMenuBaseDto" />
+		<table tableName="CC_DEPARTMENT" domainObjectName="CcDepartmentBaseDto" />
+ 
+
+
+	</context>
+</generatorConfiguration>

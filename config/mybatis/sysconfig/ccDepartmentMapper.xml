@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ccDepartmentMapper">
+    <resultMap type="ccDepartmentDto" id="ccDepartmentDtoMap" extends="baseMapper.ccDepartmentBaseDtoMap">
+        <result column="checked" property="checked" jdbcType="VARCHAR" />
+        <result column="comname" property="comName" jdbcType="VARCHAR" /> 
+    </resultMap>
+     <select id="selectList" parameterType="Map" resultMap="ccDepartmentDtoMap">
+      <if test="searchDto.page!=null">
+              SELECT * FROM
+            (
+            SELECT A.*, 1 RN
+            FROM ( 
+         </if>
+        SELECT a.*,c.comname FROM  
+        cc_department a left join cd_company c on a.comcode=c.comcode
+        <where>  
+            <trim prefixOverrides="add">
+             <if test="searchDto.depCatg!=null">
+              and   a.depCatg=#{searchDto.depCatg}
+            </if>
+            <if test="searchDto.departMentName !=null and searchDto.departMentName!=''">
+                    AND a.depname like '%'||#{searchDto.departMentName}||'%' 
+            </if>
+            <if test="searchDto.userValidstatus!=null and searchDto.userValidstatus!=''">
+              and a.validstate=#{searchDto.userValidstatus}
+            </if>
+            <if test="searchDto.comCode!=null and searchDto.comCode!=''">
+              and a.comcode=#{searchDto.comCode}
+            </if>
+            <if test="searchDto.validstate!=null and searchDto.validstate!=''">
+              and a.validstate=#{searchDto.validstate}
+            </if>
+            </trim> 
+        </where>
+        order by a.comcode,a.newdepcode
+        <if test="searchDto.page!=null">
+         ) A)t WHERE RN BETWEEN #{searchDto.page.startIndex} AND #{searchDto.page.endIndex}
+         </if>
+     </select>
+     <!--获取部门List（包含勾选） -->
+	<select id="selectListChecked" parameterType="Map" resultMap="ccDepartmentDtoMap">
+		select m.*,a.checked from cc_department m
+		left join (select 1 as checked,entitydepartment from cd_dep_vir2ent where
+		virtualdepartment=#{searchDto.newDepCode,jdbcType=VARCHAR}) a 
+		on m.newdepcode = a.entitydepartment
+		where m.depcatg=#{searchDto.depCatg,jdbcType=VARCHAR}
+		<if test="searchDto.comCode!=null and searchDto.comCode!=''">
+              and m.comcode=#{searchDto.comCode}
+            </if>
+<!-- 		and m.comCode=#{searchDto.comCode,jdbcType=VARCHAR} -->
+     </select>
+<!--      获得各个指标的主责部门 -->
+    <select id="getCdIndexDuty" parameterType="Map" resultMap="ccDepartmentDtoMap">
+        SELECT d.* FROM cd_indexduty a left join cc_department d on a.maindepment=d.newdepcode where d.comcode=#{comCode,jdbcType=VARCHAR} 
+        and a.indexcode= #{indexCode,jdbcType=VARCHAR}   
+    </select>    
+      <select id="getHaveDep" parameterType="Map" resultMap="ccDepartmentDtoMap">
+        SELECT A.* FROM cc_department  A
+       inner join  cd_dep_vir2ent d on a.newdepcode=d.entitydepartment
+        <where>  
+            <trim prefixOverrides="add">
+             <if test="searchDto.depCatg!=null">
+              and   a.depCatg=#{searchDto.depCatg}
+            </if>
+            <if test="searchDto.newDepCode!=null">
+              and  ( d.virtualdepartment=#{searchDto.newDepCode} or d.entitydepartment=#{searchDto.newDepCode})
+            </if>
+            <if test="searchDto.departMentName!=null and searchDto.departMentName!=''">
+                 <bind name="_departMentName" value="'%' +departMentName + '%'" /> 
+                  and  a.depname like '${_departMentName}'
+            </if>
+            <if test="searchDto.userValidstatus!=null and searchDto.userValidstatus!=''">
+              and a.validstate=#{searchDto.userValidstatus}
+            </if>
+            </trim> 
+        </where>
+     </select>
+      <!--插入 部门信息 -->
+      <insert id="insert" parameterType="CcDepartmentDto">
+         insert into cc_department
+            (depname,depcatg,validstate,newdepcode,depkindcode) 
+            values
+            (#{depname,jdbcType=VARCHAR},#{depcatg,jdbcType=VARCHAR}, 
+           #{validstate,jdbcType=VARCHAR},#{newdepcode,jdbcType=VARCHAR},
+           #{depkindcode,jdbcType=VARCHAR})
+      </insert>
+      <!--查询 部门信息 -->
+      <select id="selectOne" parameterType="Map" resultMap="ccDepartmentDtoMap">
+         select d.*,c.comname from cc_department d left join cd_company c on c.comcode=d.comcode
+         where newdepcode=#{searchDto.newDepCode,jdbcType=VARCHAR}
+      </select>
+      <!--更新 部门信息 -->
+      <update id="update" parameterType="CcDepartmentDto">
+         update cc_department 
+         set depname=#{depname,jdbcType=VARCHAR},depcatg=#{depcatg,jdbcType=VARCHAR},
+             validstate=#{validstate,jdbcType=VARCHAR},depkindcode=#{depkindcode,jdbcType=VARCHAR}
+         where newdepcode=#{newdepcode,jdbcType=VARCHAR}
+      </update>
+<!-- 获取部门最大的编码 -->
+	<select id="getMaxCode" parameterType="Map" resultType="String">
+		select max(c.newdepcode) from cc_department c
+	</select>
+<!-- 	查询有多少条部门数据 -->
+	<select id="count" parameterType="Map" resultType="int">
+	   select count(*) from cc_department a
+	     <where>  
+            <trim prefixOverrides="add">
+             <if test="searchDto.depCatg!=null">
+              and   a.depCatg=#{searchDto.depCatg}
+            </if>
+            <if test="searchDto.departMentName !=null and searchDto.departMentName !=''">
+              and depname like '%'||#{searchDto.departMentName}||'%' 
+            </if>
+            <if test="searchDto.userValidstatus!=null and searchDto.userValidstatus!=''">
+              and validstate=#{searchDto.userValidstatus}
+            </if>
+            <if test="searchDto.comCode!=null and searchDto.comCode!=''">
+              and comcode=#{searchDto.comCode}
+            </if>
+            </trim> 
+        </where>
+	</select>
+	<!--删除部门表信息-->
+	<delete id="deleteById" parameterType="String">
+	delete from cc_department d
+	where 1=1
+    and d.newdepcode=#{newdepcode,jdbcType=VARCHAR}
+	</delete>
+	<!--查询字段对应的主责部门-->
+	<select id="selectIndexDep" resultMap="ccDepartmentDtoMap">
+	    select * from cc_department d left join CD_INDEXDUTY y on d.newdepcode=y.maindepment 
+        where y.indexcode=#{searchDto.indexCode,jdbcType=VARCHAR} and d.comcode=#{searchDto.comCode,jdbcType=VARCHAR}
+	</select>
+<!-- 月初第一次获得给那些部门发送数据录入提醒 -->
+	<select id="getDataInputList" parameterType="Map" resultMap="ccDepartmentDtoMap">
+        SELECT distinct  m.newdepcode,M.DEPNAME FROM cd_factor f inner join cc_fac2dep d on f.faccode=d.faccode  
+        inner join cc_department m on m.newdepcode=d.inputdep where f.datafrom='12'
+          and (f.validdate is null or f.validdate = '1')
+<if test="searchDto.useview!=null and searchDto.useview!=''">
+  and   (( f.usegroup='1' and f.usesupervise is null) or (f.useview='1' and f.usesupervise is null and f.usegroup is null))
+</if>
+<if test="searchDto.usegroup!=null and searchDto.usegroup!=''">
+  and  f.usesupervise='1' 
+</if>
+<if test="searchDto.useview==null and searchDto.usegroup==null">
+and (f.usesupervise='1' or ( f.usegroup='1' and f.usesupervise is null) or (f.useview='1' and f.usesupervise is null and f.usegroup is null))
+</if>
+
+            <!--报送频率 -->
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals("M")'>
+                   and f.fetchrate='M'
+               </if>
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals("Q")'>
+                   and f.fetchrate in ('M','Q')
+               </if>
+                <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals( "H") '>
+                   and f.fetchrate in ('M','Q','H')
+               </if>
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals( "Y") '>
+                   and f.fetchrate in ('M','Q','H','Y')
+               </if>
+   </select>
+   <!-- 集团报送和因子填表还没有报提交的部门 -->
+    <select id="getDataInputListGroup" parameterType="Map" resultMap="ccDepartmentDtoMap">
+        SELECT k2 as newdepcode  FROM (    
+SELECT a.*,b.*,CASE  WHEN  a.k1=b.k3 THEN 1 else 0 end as kk FROM (  
+SELECT count(i.faccode) as k1, d.inputdep as k2
+  FROM cd_factor i
+ inner join cc_fac2dep d
+    on i.faccode = d.faccode
+ where (( i.useview = '1' and i.usegroup is null and i.usesupervise is null)
+    or (i.usegroup = '1' and i.usesupervise is null))
+     and (i.validdate is null or i.validdate = '1')
+    <!--报送频率 -->
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals("M")'>
+                   and i.fetchrate='M'
+               </if>
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals("Q")'>
+                   and i.fetchrate in ('M','Q')
+               </if>
+                <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals( "H") '>
+                   and i.fetchrate in ('M','Q','H')
+               </if>
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals( "Y") '>
+                   and i.fetchrate in ('M','Q','H','Y')
+               </if>
+ group by d.inputdep
+) a  left join (
+SELECT count(k.faccode) as k3, k.filltercom as k4
+  FROM cc_facinputtrack k
+ where to_char(k.statdate, 'yyyyMM') = #{searchDto.statDate}
+   and k.inputstate = '1' 
+ group by k.filltercom
+) b on a.k2=b.k4) where kk=0
+   </select>
+   <!-- 分类监管还没有报提交的部门 -->
+    <select id="getDataInputListUpervise" parameterType="Map" resultMap="ccDepartmentDtoMap">
+        SELECT k2 as newdepcode FROM (
+SELECT a.*,b.* ,case when k1=k3 then 1 else 0 end as kk FROM (
+SELECT count(i.faccode) as k1, d.inputdep as k2
+  FROM cd_factor i
+ inner join cc_fac2dep d
+    on i.faccode = d.faccode
+ where i.usesupervise='1'
+  and (i.validdate is null or i.validdate = '1')
+  <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals("M")'>
+                   and i.fetchrate='M'
+               </if>
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals("Q")'>
+                   and i.fetchrate in ('M','Q')
+               </if>
+                <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals( "H") '>
+                   and i.fetchrate in ('M','Q','H')
+               </if>
+               <if test= ' searchDto.fetchrate!=null and searchDto.fetchrate.equals( "Y") '>
+                   and i.fetchrate in ('M','Q','H','Y')
+               </if> 
+   group by d.inputdep) a left join (
+ SELECT count(f.faccode) as k3,f.fillercom as k4 FROM mid_deterfactor f where to_char(f.statdate,'yyyyMM')=#{searchDto.statDate} group by f.fillercom)b on a.k2=b.k4) where kk='0'
+   </select>
+<!--   推送任务   查询一个指标对应那些主责部门 -->
+   <select id="selectListToFiowPsh" parameterType="Map" resultMap="ccDepartmentDtoMap">
+   SELECT m.*,case when t.taskcode is null then 0 else  1 end checked FROM flow_indexpush p left join cd_indexduty d on p.indexcode=d.indexcode
+       left join cc_department m on m.newdepcode=d.maindepment
+     left join flow_indextask t on p.indexcode=t.indexcode 
+    and m.comcode=t.comcode
+    and to_char(p.statdate,'yyyyMM')=to_char(t.statdate,'yyyyMM')
+    and t.maindepmentcode=m.newdepcode
+where p.indexcode=#{indexCode}
+       and p.comcode=m.comcode
+       and to_char(p.statdate,'yyyyMM')=  #{statDate,jdbcType=VARCHAR}
+       and p.comcode=#{comCode,jdbcType=VARCHAR}
+       and p.channelcode=#{channelCode,jdbcType=VARCHAR}
+       and p.classcode=#{classCode,jdbcType=VARCHAR}
+   </select>
+   
+   
+   
+   
+   
+   
+   <!-- 分类监管还没有报提交的部门 -->
+    <select id="getDataInputListUperviseString" parameterType="SearchDto" resultType="String">
+        SELECT k2 as newdepcode FROM (
+SELECT a.*,b.* ,case when k1=k3 then 1 else 0 end as kk FROM (
+SELECT count(i.faccode) as k1, d.inputdep as k2
+  FROM cd_factor i
+ inner join cc_fac2dep d
+    on i.faccode = d.faccode
+ where i.usesupervise='1'
+  and (i.validdate is null or i.validdate = '1')
+  <if test= ' fetchrate!=null and fetchrate.equals("M")'>
+                   and i.fetchrate='M'
+               </if>
+               <if test= ' fetchrate!=null and fetchrate.equals("Q")'>
+                   and i.fetchrate in ('M','Q')
+               </if>
+                <if test= ' fetchrate!=null and fetchrate.equals( "H") '>
+                   and i.fetchrate in ('M','Q','H')
+               </if>
+               <if test= ' fetchrate!=null and fetchrate.equals( "Y") '>
+                   and i.fetchrate in ('M','Q','H','Y')
+               </if> 
+   group by d.inputdep) a left join (
+ SELECT count(f.faccode) as k3,f.fillercom as k4 FROM mid_deterfactor f where to_char(f.statdate,'yyyyMM')=#{statDate} group by f.fillercom)b on a.k2=b.k4) where kk='0'
+   </select>
+   
+    <!-- 集团报送和因子填表还没有报提交的部门 -->
+    <select id="getDataInputListGroupString" parameterType="SearchDto" resultType="String">
+        SELECT k2 as newdepcode  FROM (    
+	SELECT a.*,b.*,CASE  WHEN  a.k1=b.k3 THEN 1 else 0 end as kk FROM (  
+	SELECT count(i.faccode) as k1, d.inputdep as k2
+	  FROM cd_factor i
+	 inner join cc_fac2dep d
+	    on i.faccode = d.faccode
+	 where (( i.useview = '1' and i.usegroup is null and i.usesupervise is null)
+	    or (i.usegroup = '1' and i.usesupervise is null))
+	     and (i.validdate is null or i.validdate = '1')
+	    <!--报送频率 -->
+	               <if test= ' fetchrate!=null and fetchrate.equals("M")'>
+	                   and i.fetchrate='M'
+	               </if>
+	               <if test= ' fetchrate!=null and fetchrate.equals("Q")'>
+	                   and i.fetchrate in ('M','Q')
+	               </if>
+	                <if test= ' fetchrate!=null and fetchrate.equals( "H") '>
+	                   and i.fetchrate in ('M','Q','H')
+	               </if>
+	               <if test= ' fetchrate!=null and fetchrate.equals( "Y") '>
+	                   and i.fetchrate in ('M','Q','H','Y')
+	               </if>
+		 group by d.inputdep
+		) a  left join (
+		SELECT count(k.faccode) as k3, k.filltercom as k4
+		  FROM cc_facinputtrack k
+		 where to_char(k.statdate, 'yyyyMM') = #{statDate}
+		   and k.inputstate = '1' 
+		 group by k.filltercom
+		) b on a.k2=b.k4) where kk=0
+   </select>
+   
+</mapper>

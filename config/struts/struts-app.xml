@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="activity" namespace="/activity" extends="risk-struts-default">	
+	<!--活动管理 -->
+	     <action name="activity_*" class="appActivityAction" method="{1}">
+            <result name="list">/jsp/activity/activityManage.jsp</result>
+            <result name="returnlist" type="redirect">/activity/activity_getList.do</result>
+            <result name="check" >/jsp/activity/activityCheck.jsp</result>
+            <result name="editor" >/jsp/activity/activityEdit.jsp</result>
+            <result name="update" type="redirect">/activity/activity_getList.do</result>
+           
+        </action>
+	</package>
+	
+	<package name="channel" namespace="/channel" extends="risk-struts-default">	
+	<!--绘听管理 -->
+	     <action name="channel_*" class="appChannelAction" method="{1}">
+            <result name="list">/jsp/channel/channelManage.jsp</result>
+            <result name="returnlist" type="redirect">/channel/channel_getList.do</result>
+            <result name="check" >/jsp/channel/channelCheck.jsp</result>
+            <result name="editor" >/jsp/channel/channelEdit.jsp</result>
+            <result name="update" type="redirect">/channel/channel_getList.do</result>
+        </action>
+	</package>
+	<package name="program" namespace="/program" extends="risk-struts-default">	
+	<!--节目管理 -->
+	     <action name="program_*" class="appProgramAction" method="{1}">
+            <result name="list">/jsp/program/programManage.jsp</result>
+            <result name="returnlist" type="redirect">/program/program_getList.do</result>
+            <result name="check" >/jsp/program/programCheck.jsp</result>
+            <result name="editor" >/jsp/program/programEdit.jsp</result>
+            <result name="update" type="redirect">/program/program_getList.do</result>
+        </action>
+	</package>
+	
+		<package name="picbook" namespace="/picbook" extends="risk-struts-default">	
+		<!--绘图管理 -->
+		     <action name="picbook_*" class="appPicbookAction" method="{1}">
+	            <result name="list">/jsp/picbook/picbookManage.jsp</result>
+	            <result name="returnlist" type="redirect">/picbook/picbook_getList.do</result>
+	            <result name="check" >/jsp/picbook/picbookCheck.jsp</result>
+	            <result name="editor" >/jsp/picbook/picbookEdit.jsp</result>
+	            <result name="update" type="redirect">/picbook/picbook_getList.do</result>
+	        </action>
+		</package>
+		
+		<package name="audio" namespace="/audio" extends="risk-struts-default">	
+	    <!--绘音管理 -->
+	     <action name="audio_*" class="appAudioAction" method="{1}">
+            <result name="list">/jsp/audio/audioManage.jsp</result>
+            <result name="returnlist" type="redirect">/audio/audio_getList.do</result>
+            <result name="check" >/jsp/audio/audioCheck.jsp</result>
+            <result name="editor" >/jsp/audio/audioEdit.jsp</result>
+            <result name="update" type="redirect">/audio/audio_getList.do</result>
+        </action>
+	    </package>
+	    
+	    <package name="huiben" namespace="/huiben" extends="risk-struts-default">	
+	    <!--绘ben管理 -->
+	     <action name="huiben_*" class="appHuibenAction" method="{1}">
+            <result name="list">/jsp/huiben/huibenManage.jsp</result>
+            <result name="returnlist" type="redirect">/huiben/huiben_getList.do</result>
+            <result name="check" >/jsp/huiben/huibenCheck.jsp</result>
+            <result name="editor" >/jsp/huiben/huibenEdit.jsp</result>
+            <result name="update" type="redirect">/huiben/huiben_getList.do</result>
+        </action>
+	    </package>
+	    <package name="audiohuiben" namespace="/audiohuiben" extends="risk-struts-default">	
+	    <!--绘ben管理 -->
+	     <action name="audiohuiben_*" class="appAudioHuibenAction" method="{1}">
+            <result name="list">/jsp/audiohuiben/audiohuibenManage.jsp</result>
+            <result name="returnlist" type="redirect">/audiohuiben/audio_getList.do</result>
+            <result name="check" >/jsp/audiohuiben/audiohuibenCheck.jsp</result>
+            <result name="editor" >/jsp/audiohuiben/audiohuibenEdit.jsp</result>
+            <result name="update" type="redirect">/audiohuiben/audiohuiben_getList.do</result>
+        </action>
+	    </package>
+	    <package name="pichuiben" namespace="/pichuiben" extends="risk-struts-default">	
+	    <!--绘ben管理 -->
+	     <action name="pichuiben_*" class="appPicHuibenAction" method="{1}">
+            <result name="list">/jsp/pichuiben/pichuibenManage.jsp</result>
+            <result name="returnlist" type="redirect">/pichuiben/pichuiben_getList.do</result>
+            <result name="check" >/jsp/pichuiben/pichuibenCheck.jsp</result>
+            <result name="editor" >/jsp/pichuiben/pichuibenEdit.jsp</result>
+            <result name="update" type="redirect">/pichuiben/pichuiben_getList.do</result>
+        </action>
+	    </package>
+		
+		<package name="comment" namespace="/comment" extends="risk-struts-default">	
+	    <!--评论管理 -->
+	     <action name="comment_*" class="appCommentAction" method="{1}">
+            <result name="list">/jsp/comment/commentManage.jsp</result>
+            <result name="returnlist" type="redirect">/comment/comment_getList.do</result>
+            <result name="check" >/jsp/comment/commentCheck.jsp</result>
+            <result name="editor" >/jsp/comment/commentEdit.jsp</result>
+            <result name="update" type="redirect">/comment/comment_getList.do</result>
+        </action>
+	    </package>
+	    <package name="firstpage" namespace="/firstpage" extends="risk-struts-default">	
+	    <!--首页管理 -->
+	     <action name="firstpage_*" class="appFirstPageAction" method="{1}">
+            <result name="list">/jsp/firstpage/firstpageManage.jsp</result>
+            <result name="returnlist" type="redirect">/firstpage/firstpage_getList.do</result>
+            <result name="check" >/jsp/firstpage/firstpageCheck.jsp</result>
+            <result name="editor" >/jsp/firstpage/firstpageEdit.jsp</result>
+            <result name="update" type="redirect">/firstpage/firstpage_getList.do</result>
+        </action>
+	    </package>
+	    <package name="flower" namespace="/flower" extends="risk-struts-default">	
+	    <!--小红花管理 -->
+	     <action name="flower_*" class="appFlowerAction" method="{1}">
+            <result name="list">/jsp/flower/flowerManage.jsp</result>
+            <result name="returnlist" type="redirect">/flower/flower_getList.do</result>
+            <result name="check" >/jsp/flower/flowerCheck.jsp</result>
+            <result name="editor" >/jsp/flower/flowerEdit.jsp</result>
+            <result name="update" type="redirect">/flower/flower_getList.do</result>
+        </action>
+	    </package>
+	    <package name="user" namespace="/user" extends="risk-struts-default">	
+	    <!--app用户管理 -->
+	     <action name="user_*" class="appUserAction" method="{1}">
+            <result name="list">/jsp/user/userManage.jsp</result>
+            <result name="returnlist" type="redirect">/user/user_getList.do</result>
+            <result name="check" >/jsp/user/userCheck.jsp</result>
+            <result name="editor" >/jsp/user/userEdit.jsp</result>
+            <result name="update" type="redirect">/user/user_getList.do</result>
+        </action>
+	    </package>
+	
+	
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ccMenuMapper">
+    <resultMap type="ccMenuDto" id="ccMenuDtoMap" extends="baseMapper.ccMenuBaseDtoMap"></resultMap>
+    <sql id="ccMenuMapperSql">
+        select m.* from cc_menu1 m left join cc_positionmenu p on p.menuid=m.menuid
+    </sql>
+    <!--根据条件查询一组菜单 -->
+    <select id="selectList" parameterType="Map" resultMap="ccMenuDtoMap">
+        <include refid="ccMenuMapperSql"/>
+        <where>
+            <trim prefixOverrides="and">
+                <if test="searchDto.depPositionCode!=null ">
+                    and   p.deppositioncode=#{searchDto.depPositionCode}
+                </if>
+                <if test="searchDto.menuLevel!=null and searchDto.menuLevel!=0">
+                    and   m.menulevel=#{searchDto.menuLevel}
+                </if>   
+                <if test="searchDto.menuId!=null ">
+                    and   m.menuid like substr(#{searchDto.menuId},0,3) ||'%' and m.menulevel>1
+                </if>
+            </trim>
+            and m.validstatus='1' order by m.displayno
+        </where>
+    </select>
+     <!--查询 菜单表 -->
+    <select id="getMenuList" parameterType="Map" resultMap="ccMenuDtoMap">
+<!--       select * from cc_menu1 c  order by c.menuid-->
+            select m.*,a.checked from cc_menu1 m 
+			left join (select 1 as checked,menuid from cc_positionmenu where
+			deppositioncode=#{searchDto.depPositionCode,jdbcType=VARCHAR}) a 
+			on m.menuid = a.menuid where a.validstatus='1'
+			order by m.menuid
+    </select>
+</mapper>

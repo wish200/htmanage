@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="appAudioDaoMapper">
+	<insert id="insert" parameterType="List">
+		insert into t_audio 
+		(AudioID, AudioName, AudioURL,UserID, NickName, AudioCatalog, AudioSource, UploadTime, AudioStatus, 
+         FlowerCnt, AudioLength, AudioContent, BackGoundPic)
+		values (#{audioid,jdbcType=VARCHAR}, #{audioname,jdbcType=VARCHAR}, #{audiourl,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{audiocatalog,jdbcType=VARCHAR}, 
+      #{audiosource,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, #{audiostatus,jdbcType=VARCHAR}, 
+      #{flowercnt,jdbcType=INTEGER}, #{audiolength,jdbcType=VARCHAR}, #{audiocontent,jdbcType=VARCHAR}, 
+      #{backgoundpic,jdbcType=VARCHAR})
+      </insert>
+      
+    <select id="selectMaxId" resultType="String">
+        select max(audioid) from t_audio
+    </select>
+<!--     选择一条数据 -->
+    <select id="selectOne" parameterType="Map" resultMap="baseMapper.appAudioBaseDtoMap">
+        select 
+        AudioID, AudioName, AudioURL,UserID, NickName, AudioCatalog, AudioSource, UploadTime, AudioStatus, 
+        FlowerCnt, AudioLength, AudioContent, BackGoundPic from t_audio
+       <where>
+        AudioID=#{searchDto.audioid,jdbcType=VARCHAR}
+       </where>
+    </select>
+    
+<!--     查找多条数据-->
+    <select id="selectList" parameterType="Map" resultMap="baseMapper.appAudioBaseDtoMap">
+        select 
+        AudioID, AudioName, AudioURL,UserID, NickName, AudioCatalog, AudioSource, UploadTime, AudioStatus, 
+        FlowerCnt, AudioLength, AudioContent, BackGoundPic from t_audio
+       <where>
+	       <trim prefixOverrides="and">
+	       		<if test="searchDto.audioid!=null and searchDto.audioid!=''">
+		          and  audioid =#{searchDto.audioid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.audioname!=null and searchDto.audioname!=''">
+		          and  audioname like CONCAT('%',#{searchDto.audioname,jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="searchDto.userid!=null and searchDto.userid!=''">
+		          and  userid =#{searchDto.activitytype,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.nickname!=null and searchDto.nickname!=''">
+		          and  nickname like CONCAT('%',#{searchDto.nickname,jdbcType=VARCHAR},'%')
+		        </if>
+		        
+		        <if test="searchDto.startdate!=null and searchDto.startdate!=''">
+		            and  uploadtime between #{searchDto.startdate,jdbcType=TIMESTAMP} and #{searchDto.enddate,jdbcType=TIMESTAMP}
+		        </if>
+		        <if test="searchDto.validstate!=null and searchDto.validstate!=''">  
+		         	and audiostatus =#{searchDto.audiostatus,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+       <if test="searchDto.page!=null">
+          limit  #{searchDto.page.startIndex}, #{searchDto.page.pageSize}
+       </if>
+    </select>
+<!--     更新一条数据 -->
+    <update id="update" parameterType="appAudioBaseDto">
+        update t_audio
+              set 
+              <trim suffixOverrides=",">
+	          <if test="audioname!=null and audioname!=''">
+	           audioname = #{audioname,jdbcType=VARCHAR},
+	          </if>
+	          <if test="audiourl!=null and audiourl!=''">
+	           audiourl = #{audiourl,jdbcType=VARCHAR},
+	          </if>  
+	          <if test="userid!=null and userid!=''">
+	             userid =  #{userid,jdbcType=VARCHAR},
+	          </if> 
+	          <if test="nickname!=null and nickname!=''">
+	             nickname =  #{nickname,jdbcType=VARCHAR},
+	          </if> 
+	           <if test="uploadtime!=null and uploadtime!=''">
+	           uploadtime = #{uploadtime,jdbcType=TIMESTAMP},
+	          </if>  
+	          <if test="audiocatalog!=null and audiocatalog!=''">
+	            audiocatalog =#{audiocatalog,jdbcType=VARCHAR},
+	          </if> 
+			  <if test="audiosource!=null and audiosource!=''">
+	           audiosource = #{audiosource,jdbcType=VARCHAR},
+	          </if>
+	          <if test="audiostatus!=null and audiostatus!=''">
+	           audiostatus = #{audiostatus,jdbcType=VARCHAR},
+	          </if>
+	          <if test="flowercnt!=null and flowercnt!=''">
+	           flowercnt = #{flowercnt,jdbcType=INTEGER},
+	          </if>
+	          <if test="audiolength!=null and audiolength!=''">
+	           audiolength = #{audiolength,jdbcType=VARCHAR},
+	          </if>
+	          <if test="audiocontent!=null and audiocontent!=''">
+	           audiocontent = #{audiocontent,jdbcType=VARCHAR},
+	          </if>
+	          <if test="backgoundpic!=null and backgoundpic!=''">
+	           backgoundpic = #{backgoundpic,jdbcType=VARCHAR},
+	          </if>   
+          </trim>         
+            where    audioid = #{audioid,jdbcType=VARCHAR}
+    </update>
+<!--     删除已条数据 -->
+    <delete id="deleteById" parameterType="appActivityBaseDto">
+       delete from  t_audio where  audioid=#{audioidid,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="count" parameterType="Map" resultType="int">
+        select count(*) from  t_audio
+         <where>
+            <trim prefixOverrides="and">
+	       		<if test="searchDto.audioid!=null and searchDto.audioid!=''">
+		          and  audioid =#{searchDto.audioid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.audioname!=null and searchDto.audioname!=''">
+		          and  audioname like CONCAT('%',#{searchDto.audioname,jdbcType=VARCHAR},'%') 
+		        </if>
+		        <if test="searchDto.userid!=null and searchDto.userid!=''">
+		          and  userid =#{searchDto.userid,jdbcType=VARCHAR}
+		        </if>
+		        
+		        <if test="searchDto.startdate!=null and searchDto.startdate!=''">
+		            and  uploadtime between #{searchDto.startdate,jdbcType=TIMESTAMP} and #{searchDto.enddate,jdbcType=TIMESTAMP}
+		        </if>
+		        <if test="searchDto.validstate!=null">  
+		         	and audiostatus =#{searchDto.validstate,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+        
+       
+       
+    </select>
+</mapper>

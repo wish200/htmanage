@@ -1,0 +1,34 @@
+@charset "utf-8";
+/* header */
+#header{ min-width:100%; background:#fff; height:80px; border-bottom:5px solid #1b96d1; position:relative; z-index:999;}
+.logo{ position:absolute;  left:-40px; top:2px; z-index:2;width:32%;}
+.topMenu{ position:absolute; right:0; top:10px; z-index:2;}
+.topMenu a{ margin-right:20px; padding-left:20px; color:#333; background:url(../../images/topIco.png) no-repeat; transition:all 0.3s ease-out;}
+.topMenu a.a_index{ background-position:0 1px;}
+.topMenu a.a_set{ background-position:0 -47px;}
+.topMenu a.a_exit{ background-position:0 -95px;}
+.topMenu a:hover{ color:#e8230d;}
+/* .topMenu a.a_index:hover{ background-position:0 -23px;}
+.topMenu a.a_set:hover{ background-position:0 -71px;}
+.topMenu a.a_exit:hover{ background-position:0 -120px;} */
+.topMenu #xred{ background:url(../../images/u115_normal.png) 0 1px  no-repeat;}
+
+/* mainNav */
+.active{ background:url(../../images/mainNav_active.png) 0 7px no-repeat;}
+.mainNav{ position:absolute; width:70%; left:30%; top:14px; z-index:1;}
+.mainNav li{ width:14%; height:47px; line-height:47px; padding-top:24px; float:left; text-align:center; background:url(../../images/mainNav_bg.png) right top no-repeat; position:relative; z-index:99; font-family:MingLiU;font-size:14px;font-weight:bold;font-style:normal;color:#666666;}
+.mainNav li a,.mainNav span{ color:#6b6c5b; display:block; cursor:pointer; }
+.mainNav li.active,.mainNav li:hover{ background:url(../../images/mainNav_active.png) 0 7px no-repeat;}
+.mainNav li.active a,.mainNav li.active span{ color:#9cd0e6;}
+.mainNav li.active dl span{ color:#207190;}
+.mainNav dt{ position:relative;}
+.mainNav dt span{ background:url(../../images/mainNav_icon.png) 166px 10px no-repeat;}
+.mainNav dl{ position:absolute; left:0; top:71px; background:#f6f6f4; border:1px solid #e6e6e6; padding:0 1px; width:178px; line-height:25px; text-align:left; font-size:14px; display:none;}
+.mainNav dl dl{ position:absolute; left:178px; top:-1px; *+top:-4px; _left:171px; _top:-3px;}
+.mainNav li.active dl a,.mainNav li dl a,.mainNav li dl span{ color:#207190; padding-left:7px;}
+.mainNav li dl a:hover{ background-color:#b0dfe9; color:#fff;}
+.mainNav li dl span:hover{ background-color:#b0dfe9; background-position:166px -26px; color:#fff;}
+
+/* 褰撳墠璺緞  锛�棣栭〉 > 鍏抽敭宀椾綅妫�煡 > 鍚堣涓撶敤*/
+.BreadNav{ padding-left:10px; background:#fafafa url(../../images/content_bg.png) 0 0 repeat-x; line-height:30px; color:#999; border-bottom:1px solid #e4e4e4;}
+.BreadNav a{ color:#999;}

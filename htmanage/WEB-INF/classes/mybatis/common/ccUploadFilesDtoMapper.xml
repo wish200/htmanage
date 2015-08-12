@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ccUploadFilesDtoMapper" >
+  <resultMap id="ccUploadFilesDtoMap" type="ccUploadFilesDto" extends="baseMapper.ccUploadFilesBaseDtoMap">
+  
+  </resultMap>
+    <!--按条件删除 -->
+	<delete id="deleteByCondition" parameterType="Map" >
+		 delete from CC_UPLOADFILES
+		   where 1=1
+		<if test="fileName !=null and fileName !='' ">
+			and UPLOADREALNAME = #{fileName,jdbcType=VARCHAR}
+        </if>
+        <if test="groupID !=null and groupID !='' ">
+			and FILEGROUPID = #{groupID,jdbcType=VARCHAR}
+        </if>
+	</delete>
+	<!--保存附件-->
+	<insert id="insert" parameterType="ccUploadFilesDto" >
+	    insert into CC_UPLOADFILES (FILEID, FILEGROUPID, MODULEID, 
+	      UPLOADFILENAME, UPLOADREALNAME, UPLOADCONTENTTYPE, 
+	      SAVEPATH, CREATETIME, CREATEUSERCODE, 
+	      REMARK)
+	    values (#{fileid,jdbcType=VARCHAR}, #{filegroupid,jdbcType=VARCHAR}, #{moduleid,jdbcType=VARCHAR}, 
+	      #{uploadfilename,jdbcType=VARCHAR}, #{uploadrealname,jdbcType=VARCHAR}, #{uploadcontenttype,jdbcType=VARCHAR}, 
+	      #{savepath,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createusercode,jdbcType=VARCHAR}, 
+	      #{remark,jdbcType=VARCHAR})
+  	</insert>
+  	<!--查询附件-->
+  	<select id ="selectAll" parameterType="Map" resultType="ccUploadFilesDto">
+  	   <if test="groupID !=null and groupID !='' ">
+  	    select * from  CC_UPLOADFILES  
+  	    where FILEGROUPID =  #{groupID,jdbcType=VARCHAR}
+  	   </if>
+  	</select>
+  	<select id ="selectOne" parameterType="Map" resultType="ccUploadFilesDto">
+  	   <if test="fileName !=null and fileName !='' ">
+  	    select * from  CC_UPLOADFILES  
+  	    where UPLOADREALNAME =  #{fileName,jdbcType=VARCHAR}
+  	   </if>
+  	</select>
+   <!-- 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CC_UPLOADFILES
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteByExample" parameterType="com.sinosoft.risk.dto.base.CcUploadFilesBaseDtoExample" >
+    delete from CC_UPLOADFILES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insert" parameterType="com.sinosoft.risk.dto.base.CcUploadFilesBaseDto" >
+    insert into CC_UPLOADFILES (FILEID, FILEGROUPID, MODULEID, 
+      UPLOADFILENAME, UPLOADREALNAME, UPLOADCONTENTTYPE, 
+      SAVEPATH, CREATETIME, CREATEUSERCODE, 
+      REMARK)
+    values (#{fileid,jdbcType=VARCHAR}, #{filegroupid,jdbcType=VARCHAR}, #{moduleid,jdbcType=VARCHAR}, 
+      #{uploadfilename,jdbcType=VARCHAR}, #{uploadrealname,jdbcType=VARCHAR}, #{uploadcontenttype,jdbcType=VARCHAR}, 
+      #{savepath,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createusercode,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.risk.dto.base.CcUploadFilesBaseDto" >
+    insert into CC_UPLOADFILES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        FILEID,
+      </if>
+      <if test="filegroupid != null" >
+        FILEGROUPID,
+      </if>
+      <if test="moduleid != null" >
+        MODULEID,
+      </if>
+      <if test="uploadfilename != null" >
+        UPLOADFILENAME,
+      </if>
+      <if test="uploadrealname != null" >
+        UPLOADREALNAME,
+      </if>
+      <if test="uploadcontenttype != null" >
+        UPLOADCONTENTTYPE,
+      </if>
+      <if test="savepath != null" >
+        SAVEPATH,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createusercode != null" >
+        CREATEUSERCODE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        #{fileid,jdbcType=VARCHAR},
+      </if>
+      <if test="filegroupid != null" >
+        #{filegroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadfilename != null" >
+        #{uploadfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadrealname != null" >
+        #{uploadrealname,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadcontenttype != null" >
+        #{uploadcontenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="savepath != null" >
+        #{savepath,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createusercode != null" >
+        #{createusercode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CC_UPLOADFILES
+    <set >
+      <if test="record.fileid != null" >
+        FILEID = #{record.fileid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filegroupid != null" >
+        FILEGROUPID = #{record.filegroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleid != null" >
+        MODULEID = #{record.moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadfilename != null" >
+        UPLOADFILENAME = #{record.uploadfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadrealname != null" >
+        UPLOADREALNAME = #{record.uploadrealname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadcontenttype != null" >
+        UPLOADCONTENTTYPE = #{record.uploadcontenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.savepath != null" >
+        SAVEPATH = #{record.savepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createusercode != null" >
+        CREATEUSERCODE = #{record.createusercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+  <update id="updateByExample" parameterType="map" >
+    update CC_UPLOADFILES
+    set FILEID = #{record.fileid,jdbcType=VARCHAR},
+      FILEGROUPID = #{record.filegroupid,jdbcType=VARCHAR},
+      MODULEID = #{record.moduleid,jdbcType=VARCHAR},
+      UPLOADFILENAME = #{record.uploadfilename,jdbcType=VARCHAR},
+      UPLOADREALNAME = #{record.uploadrealname,jdbcType=VARCHAR},
+      UPLOADCONTENTTYPE = #{record.uploadcontenttype,jdbcType=VARCHAR},
+      SAVEPATH = #{record.savepath,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      CREATEUSERCODE = #{record.createusercode,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.risk.dto.base.CcUploadFilesBaseDto" >
+    update CC_UPLOADFILES
+    <set >
+      <if test="filegroupid != null" >
+        FILEGROUPID = #{filegroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleid != null" >
+        MODULEID = #{moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadfilename != null" >
+        UPLOADFILENAME = #{uploadfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadrealname != null" >
+        UPLOADREALNAME = #{uploadrealname,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadcontenttype != null" >
+        UPLOADCONTENTTYPE = #{uploadcontenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="savepath != null" >
+        SAVEPATH = #{savepath,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createusercode != null" >
+        CREATEUSERCODE = #{createusercode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.risk.dto.base.CcUploadFilesBaseDto" >
+    update CC_UPLOADFILES
+    set FILEGROUPID = #{filegroupid,jdbcType=VARCHAR},
+      MODULEID = #{moduleid,jdbcType=VARCHAR},
+      UPLOADFILENAME = #{uploadfilename,jdbcType=VARCHAR},
+      UPLOADREALNAME = #{uploadrealname,jdbcType=VARCHAR},
+      UPLOADCONTENTTYPE = #{uploadcontenttype,jdbcType=VARCHAR},
+      SAVEPATH = #{savepath,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      CREATEUSERCODE = #{createusercode,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </update>    -->
+  
+</mapper>

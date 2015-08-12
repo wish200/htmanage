@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	>
+
+	<!-- 定时任务类 -->
+	<bean name="taskJob" class="com.huiting.manage.system.task.TaskJob" />
+	<bean id="methodInvokingJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="taskJob" /><!--任务的类 -->
+		</property>
+		<property name="targetMethod"><!--任务的方法 -->
+			<value>SayHello</value>
+		</property>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 这里不可以直接在属性jobDetail中引用taskJob， 因为他要求的是一个jobDetail类型的对象， 所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+		<property name="jobDetail">
+			<ref bean="methodInvokingJobDetail" />
+		</property>
+		<!-- 每天的8点到21点每隔1分钟触发 -->
+		<property name="cronExpression">
+<!-- 			<value>0 0 0 15 * ? </value> -->
+    <!--            秒  分   时     日     月   周几       年 -->
+			<value>0  0 9  2  *  ?  </value>
+		</property>
+
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 添加触发器 -->
+		<property name="triggers">
+			<list>
+				<ref local="cronTrigger" />
+			</list>
+		</property>
+	</bean>
+</beans>

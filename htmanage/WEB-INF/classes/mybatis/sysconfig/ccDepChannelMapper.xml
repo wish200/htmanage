@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ccDepChannelMapper">
+	<!-- 插入用户信息 -->
+	<insert id="insertList" parameterType="List">
+	         insert into cc_depchannel
+            (department, channelcode, validstate, createusercode, createtime, remark, disabledate)
+            (
+            <foreach collection="list" item="item" index="index" separator="union all" >
+            select
+               #{item.department,jdbcType=VARCHAR}, #{item.channelcode,jdbcType=VARCHAR}, 
+               #{item.validstate,jdbcType=VARCHAR}, #{item.createusercode,jdbcType=VARCHAR},
+              #{item.createtime,jdbcType=TIMESTAMP}, #{item.remark,jdbcType=VARCHAR},
+              #{item.disabledate,jdbcType=TIMESTAMP}
+               from dual
+            </foreach>
+            )
+	</insert>
+	<delete id="deleteById" parameterType="String">
+	    delete  cc_depchannel c 
+	    where c.department=#{department,jdbcType=VARCHAR}
+	</delete>
+	 <!--查询部门含有的部门渠道-->
+    <select id="getDepChannelList" parameterType="Map" resultType="CcDepChannelDto">
+       select distinct channelcode from cc_depchannel where department in
+        <foreach collection="depcode" item="dep"  open="(" separator="," close=")">  
+            #{dep}  
+        </foreach>
+    </select>
+</mapper>

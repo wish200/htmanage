@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cdDepVir2EntMapper">
+	<!-- 插入用户信息 -->
+	<insert id="insertList" parameterType="List">
+	         insert into cd_dep_vir2ent
+            (virtualdepartment, entitydepartment)
+            (
+            <foreach collection="list" item="item" index="index" separator="union all" >
+            select
+               #{item.virtualdepartment,jdbcType=VARCHAR}, #{item.entitydepartment,jdbcType=VARCHAR}
+               from dual
+            </foreach>
+            )
+	</insert>
+	<delete id="deleteById" parameterType="String">
+	     delete cd_dep_vir2ent 
+	     where virtualdepartment=#{virtualdepartment,jdbcType=VARCHAR}
+	</delete>
+</mapper>
