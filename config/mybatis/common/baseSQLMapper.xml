@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="baseSQLMapper">
+	<!-- 查询模板类型表 -->
+	<select id="getCdTemplateCatnoList"  parameterType="searchDto" resultMap="baseMapper.cdTemplateCatNoBaseDtoMap">
+		select * from CD_TEMPLATECATNO w
+		<where>
+		  <if test="comCode!=null and comCode!='000000'">
+		       w.templatecatno='T0100000' or w.fathercode='T0100000'
+		  </if>
+		</where>
+	</select>
+	<!--查询数据来源 -->
+    <select id="getDataSoureList" parameterType="searchDto" resultMap="baseMapper.cdDataSourceBaseDtoMap">
+        select * from cd_datasource 
+        <where>
+            <if test="datafromtype!=null">
+                datasourcecode!=12 and validstatus = 1
+            </if>
+        </where>
+    </select>
+	<!--查询因子大类代码 -->
+    <select id="getIdxCatgoryList" parameterType="searchDto" resultMap="baseMapper.cdIdxCatgoryBaseDtoMap">
+        select * from cd_idxcatgory 
+    </select>
+
+</mapper>

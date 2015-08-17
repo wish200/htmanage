@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--邮件模板接受人表  -->
+<mapper namespace="cdEmailRecMapper">
+    
+    <resultMap  type="cdEmailRecDto" id="cdEmailRecDtoMap"  
+     extends="baseMapper.cdEmailRecBaseDtoMap">
+         <association property="ccUserDto" resultMap="ccUserDtoMapper.ccUserDtoMap"></association>
+         <association property="cdEmailTemplateBaseDto" resultMap="baseMapper.cdEmailTemplateBaseDtoMap"></association>
+    </resultMap > 
+    
+	
+<!--	 邮件模板接受人表 (查询)-->
+	<select id="selectList" parameterType="Map" resultMap="cdEmailRecDtoMap">
+	   select e.recno,e.rectype,u.*
+	   from CD_EMAIL_REC e left join cc_user u on e.recno=u.usercode
+	   left join cd_email_template r on e.templatenum=r.templatenum
+	  <where>
+	    <if test="searchDto.templatenum != null and searchDto.templatenum !='' ">
+	        e.templatenum=#{searchDto.templatenum,jdbcType=VARCHAR}
+	    </if>
+	     <if test="searchDto.templatecatno != null and searchDto.templatecatno !='' ">
+           and r.templatecatno=#{searchDto.templatecatno,jdbcType=VARCHAR}
+       </if>
+	   <if test="searchDto.newDepCode != null and searchDto.newDepCode !='' ">
+	       and u.newdepcode=#{searchDto.newDepCode,jdbcType=VARCHAR}
+	   </if>
+	   </where>
+	</select>
+	<!-- 根据邮件接收人，得到用户email-->
+	<select id="getUserEmailRec" parameterType="Map" resultMap="cdEmailRecDtoMap">
+	   select * from  cd_email_template t
+       left join  cd_email_rec r on r.templatenum=t.templatenum
+       left join cc_user u on u.usercode=r.recno
+<!--        查询推送任务指标表的时候需要添加 -->
+       <if test="searchDto.indexCode!=null and searchDto.indexCode!=''">
+       left join cd_indexduty d on d.maindepment=u.newdepcode and d.indexcode=#{searchDto.indexCode,jdbcType=VARCHAR}
+       </if>
+       where 1=1
+            <if test="searchDto.comCode != null and searchDto.comCode !=''" >
+            and t.comcode=#{searchDto.comCode,jdbcType=VARCHAR}
+            </if>
+            <if test="searchDto.templatecatno != null and searchDto.templatecatno !=''" >
+            and t.templatecatno=#{searchDto.templatecatno,jdbcType=VARCHAR}
+            </if>
+           <!--  <if test="searchDto.moduleid != null and searchDto.moduleid !=''" >
+            and t.moduleid=#{searchDto.moduleid,jdbcType=VARCHAR}
+            </if> -->
+           <!--  <if test="searchDto.newDepCode != null and searchDto.newDepCode !=''" >
+            and u.newdepcode=#{searchDto.newDepCode,jdbcType=VARCHAR}
+            </if> -->
+            <if test="searchDto.rectype != null and searchDto.rectype !=''" > 
+            and r.rectype=#{searchDto.rectype,jdbcType=VARCHAR}
+            </if>
+	</select>
+	
+<!--	 邮件模板接受人表 (插入)-->
+	<insert id="insert" parameterType="CdEmailRecDto">
+      insert into cd_email_rec
+	  <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templatenum != null" >
+        templatenum,
+      </if>
+       <if test="recno != null" >
+        recno,
+      </if>
+       <if test="rectype != null" >
+        newdepcode,
+      </if>
+       <if test="newdepcode != null" >
+        rectype,
+      </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templatenum != null" >
+        #{templatenum,jdbcType=VARCHAR},
+      </if>
+        <if test="recno != null" >
+        #{recno,jdbcType=VARCHAR},
+      </if>
+      <if test="newdepcode != null" >
+       #{newdepcode,jdbcType=VARCHAR},
+      </if>
+        <if test="rectype != null" >
+        #{rectype,jdbcType=VARCHAR},
+      </if>
+      </trim>
+	</insert>
+	
+<!--	 邮件模板接受人表 (删除)-->
+	<insert id="deleteById" parameterType="String">
+	  delete cd_email_rec
+	  where templatenum = #{templatenum,jdbcType=VARCHAR}
+	</insert>
+	
+	
+	
+</mapper>

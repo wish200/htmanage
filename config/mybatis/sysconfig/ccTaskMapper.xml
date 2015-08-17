@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--我的工作任务 -->
+<mapper namespace="ccTaskMapper">
+   <resultMap type="ccTaskDto" id="ccTaskDtoMap"
+		extends="baseMapper.ccTaskBaseDtoMap">
+    	<association property="ccTaskModuleBaseDto" resultMap="baseMapper.ccTaskModuleBaseDtoMap"/> 
+   </resultMap>
+   <select id="count" parameterType="Map" resultType="int">
+        select count(*) from cc_task m 
+      left join cc_taskmodule c on m.modulecode=c.modulecode
+      where 1=1
+      <if test="searchDto.comCode != null and searchDto.comCode !=''" >
+        and m.comcode=#{searchDto.comCode,jdbcType=VARCHAR}
+      </if>
+      <if test="searchDto.newDepCode != null and searchDto.newDepCode !=''" >
+        and m.newdepcode=#{searchDto.newDepCode,jdbcType=VARCHAR}
+      </if>
+      <if test="searchDto.depPositionCode != null and searchDto.depPositionCode != ''" >
+	    and m.deppositioncode = #{searchDto.depPositionCode,jdbcType=VARCHAR}
+	  </if>
+   </select>
+   <!--查询list-->
+   <select id="selectList" parameterType="searchDto" resultMap="ccTaskDtoMap" >
+    <if test="searchDto.page!=null">
+              SELECT * FROM
+            (
+            SELECT A.*, 1 RN
+            FROM ( 
+         </if>
+      select  m.*,MODULENAME, MODULEURL, MODULEPARM1, MODULEPARM2 from cc_task m
+      left join cc_taskmodule c on m.modulecode=c.modulecode
+      where 1=1
+      <if test="searchDto.comCode != null and searchDto.comCode !=''" >
+        and m.comcode=#{searchDto.comCode,jdbcType=VARCHAR}
+      </if>
+      <if test="searchDto.newDepCode != null and searchDto.newDepCode !=''" >
+        and m.newdepcode=#{searchDto.newDepCode,jdbcType=VARCHAR}
+      </if>
+      <if test="searchDto.depPositionCode != null and searchDto.depPositionCode != ''" >
+	    and m.deppositioncode = #{searchDto.depPositionCode,jdbcType=VARCHAR}
+	  </if>
+      order by m.createtime desc
+      <if test="searchDto.page!=null">
+         ) A) T WHERE RN BETWEEN #{searchDto.page.startIndex} AND #{searchDto.page.endIndex}
+         </if>
+   </select>   
+   <!--插入-->
+   <insert id="insert" >
+      insert into cc_task
+ 	<trim prefix="(" suffix=")" suffixOverrides="," >
+        TASKCODE,
+       <if test="taskcontent != null and taskcontent != ''" >
+        taskcontent,
+      </if>
+      <if test="modulecode != null and modulecode != ''" >
+        MODULECODE,
+      </if>
+      <if test="createtime != null and createtime != ''" >
+        createtime,
+      </if>
+       <if test="taskparam1 != null and taskparam1 != ''" >
+        taskparam1,
+      </if>
+      <if test="taskparam2 != null and taskparam2 != ''" >
+        taskparam2,
+      </if>
+      <if test="taskstatus != null and taskstatus != ''" >
+        TASKSTATUS,
+      </if>
+       <if test="comcode != null and comcode != ''" >
+        comcode,
+      </if>
+       <if test="newdepcode != null and newdepcode != ''" >
+        newdepcode,
+      </if>
+       <if test="deppositioncode != null and deppositioncode != ''" >
+        deppositioncode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+         taskcode_id.nextval,
+       <if test="taskcontent != null and taskcontent != ''" >
+        #{taskcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="modulecode != null and modulecode != ''" >
+        #{modulecode,jdbcType=VARCHAR},
+      </if>
+       <if test="createtime != null and createtime != ''" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskparam1 != null and taskparam1 != ''" >
+        #{taskparam1,jdbcType=VARCHAR},
+      </if>
+       <if test="taskparam2 != null and taskparam2 != ''" >
+        #{taskparam2,jdbcType=VARCHAR},
+      </if>
+      <if test="taskstatus != null and taskstatus != ''" >
+        #{taskstatus,jdbcType=VARCHAR},
+      </if>
+       <if test="comcode != null and comcode != ''" >
+        #{comcode,jdbcType=VARCHAR},
+      </if>
+       <if test="newdepcode != null and newdepcode != ''" >
+        #{newdepcode,jdbcType=VARCHAR},
+      </if>
+       <if test="deppositioncode != null and deppositioncode != ''" >
+        #{deppositioncode,jdbcType=VARCHAR},
+      </if>
+    </trim>      
+   </insert>
+   <!--更新 -->
+   <update id="update">
+       update cc_task
+	    <set>
+	      <if test="taskstatus != null and taskstatus !=''" >
+	        taskstatus = #{taskstatus,jdbcType=VARCHAR}
+	      </if>
+	    </set>
+	       where 1=1
+	       <if test="taskparam1 != null and taskparam1 != ''" >
+	        and taskparam1 = #{taskparam1,jdbcType=VARCHAR}
+	       </if>
+	       <if test="taskparam2 != null and taskparam2 != ''" >
+	        and taskparam2 = #{taskparam2,jdbcType=VARCHAR}
+	       </if>
+	        <if test="comcode != null and comcode != ''" >
+	        and comcode = #{comcode,jdbcType=VARCHAR}
+	      </if>
+	       <if test="newdepcode != null and newdepcode != ''" >
+	        and newdepcode = #{newdepcode,jdbcType=VARCHAR}
+	      </if>
+	      <if test="deppositioncode != null and deppositioncode != ''" >
+	        and deppositioncode = #{deppositioncode,jdbcType=VARCHAR}
+	      </if>
+   </update>
+   <delete id="deleteByCondition" parameterType="Map">
+	    delete cc_task c where 1=1
+	    <if test="ccTaskDto.comcode != null and ccTaskDto.comcode != ''" >
+	    and c.comcode=#{ccTaskDto.comcode,jdbcType=VARCHAR}  
+	    </if>
+	    <if test="ccTaskDto.newdepcode != null and ccTaskDto.newdepcode != ''" >
+	    and c.newdepcode=#{ccTaskDto.newdepcode,jdbcType=VARCHAR}  
+	    </if>
+	    <if test="ccTaskDto.taskparam1 != null and ccTaskDto.taskparam1 != ''" >
+	    and c.taskparam1=#{ccTaskDto.taskparam1,jdbcType=VARCHAR}
+	    </if>
+	    <if test="ccTaskDto.deppositioncode != null and ccTaskDto.deppositioncode != ''" >
+	     and deppositioncode = #{ccTaskDto.deppositioncode,jdbcType=VARCHAR}
+	    </if>
+   </delete>
+   
+   <delete id="deleteById" parameterType="String">
+	    delete cc_task c where 1=1
+	    <if test="taskparam1 != null and taskparam1 != ''" >
+	    and c.taskparam1=#{indexCode,jdbcType=VARCHAR}
+	    </if>
+   </delete>
+</mapper>

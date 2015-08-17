@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="appActivityDaoMapper">
+	<insert id="insert" parameterType="List">
+		insert into t_activity 
+		(ActivityID, ActivityName, ActivityType, ActivityDESC, ActivityPicURL, ActivityTime,validstatus)
+		values
+		(#{activityid,jdbcType=VARCHAR}, #{activityname,jdbcType=VARCHAR}, #{activitytype,jdbcType=VARCHAR}, 
+      #{activitydesc,jdbcType=VARCHAR}, #{activitypicurl,jdbcType=VARCHAR}, #{activitytime,jdbcType=TIMESTAMP}, #{validstatus,jdbcType=VARCHAR}
+      )
+      </insert>
+      
+    <select id="selectMaxId" resultType="String">
+        select max(ActivityID) from t_activity
+    </select>
+<!--     选择一条数据 -->
+    <select id="selectOne" parameterType="Map" resultMap="baseMapper.appActivityBaseDtoMap">
+        select 
+       activityid,
+       activityname,
+       activitytype,
+       activitydesc,
+       activitypicurl,
+       activitytime,
+       validstatus from t_activity
+       <where>
+        activityid=#{searchDto.activityid,jdbcType=VARCHAR}
+       </where>
+    </select>
+<!--     查找多条数据-->
+    <select id="selectList" parameterType="Map" resultMap="baseMapper.appActivityBaseDtoMap">
+       
+        select 
+       activityid,
+       activityname,
+       activitytype,
+       activitydesc,
+       activitypicurl,
+       activitytime,
+       validstatus from t_activity
+       <where>
+	       <trim prefixOverrides="and">
+	       		<if test="searchDto.activityid!=null and searchDto.activityid!=''">
+		          and  activityid =#{searchDto.activityid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.activityname!=null and searchDto.activityname!=''">
+		          and  activityname like CONCAT('%',#{searchDto.activityname,jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="searchDto.activitytype!=null and searchDto.activitytype!=''">
+		          and  activitytype =#{searchDto.activitytype,jdbcType=VARCHAR}
+		        </if>
+		        
+		        <if test="searchDto.activitytime!=null and searchDto.activitytime!=''">
+		            and  activitytime between #{searchDto.startdate,jdbcType=TIMESTAMP} and #{searchDto.enddate,jdbcType=TIMESTAMP}
+		        </if>
+		        <if test="searchDto.validstate!=null and searchDto.validstate!=''">  
+		         	and validstatus =#{searchDto.validstate,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+       order by activityid
+       <if test="searchDto.page!=null">
+          limit  #{searchDto.page.startIndex}, #{searchDto.page.pageSize}
+       </if>
+    </select>
+<!--     更新一条数据 -->
+    <update id="update" parameterType="appActivityBaseDto">
+        update t_activity
+              set 
+              <trim suffixOverrides=",">
+	          <if test="activityname!=null and activityname!=''">
+	           activityname = #{activityname,jdbcType=VARCHAR},
+	          </if>
+	          <if test="activitytype!=null and activitytype!=''">
+	           activitytype = #{activitytype,jdbcType=VARCHAR},
+	          </if>  
+	          <if test="activitydesc!=null and activitydesc!=''">
+	             activitydesc =  #{activitydesc,jdbcType=VARCHAR},
+	          </if> 
+	          <if test="activitypicurl!=null and activitypicurl!=''">
+	             activitypicurl =  #{activitypicurl,jdbcType=VARCHAR},
+	          </if> 
+	           <if test="activitytime!=null and activitytime!=''">
+	           activitytime = #{activitytime,jdbcType=TIMESTAMP},
+	          </if>  
+	          <if test="validstatus!=null and validstatus!=''">
+	            validstatus =#{validstatus,jdbcType=VARCHAR},
+	          </if>     
+          </trim>         
+            where    activityid = #{activityid,jdbcType=VARCHAR}
+    </update>
+<!--     删除已条数据 -->
+    <delete id="deleteById" parameterType="appActivityBaseDto">
+       delete from t_activity where activityid=#{activityid,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="count" parameterType="Map" resultType="int">
+        select count(*) from  t_activity
+         <where>
+            <trim prefixOverrides="and">
+	       		<if test="searchDto.activityid!=null and searchDto.activityid!=''">
+		          and  activityid =#{searchDto.activityid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.activityname!=null and searchDto.activityname!=''">
+		          and  activityname like CONCAT('%',#{searchDto.activityname,jdbcType=VARCHAR},'%') 
+		        </if>
+		        <if test="searchDto.activitytype!=null and searchDto.activitytype!=''">
+		          and  activitytype =#{searchDto.activitytype,jdbcType=VARCHAR}
+		        </if>
+		        
+		        <if test="searchDto.activitytime!=null and searchDto.activitytime!=''">
+		            and  activitytime between #{searchDto.startdate,jdbcType=TIMESTAMP} and #{searchDto.enddate,jdbcType=TIMESTAMP}
+		        </if>
+		        <if test="searchDto.validstate!=null">  
+		         	and validstatus =#{searchDto.validstate,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+        
+       
+       
+    </select>
+</mapper>

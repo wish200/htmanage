@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="htmanage"
+  id="myeclipse.1436836882182"
+  context-root="/htmanage"
+  j2ee-spec="5.0"
+  archive="htmanage.war">
+  <attributes>
+    <attribute name="webrootdir" value="htmanage" />
+  </attributes>
+</project-module>
+

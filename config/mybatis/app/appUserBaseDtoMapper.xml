@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="appUserDaoMapper">
+	<insert id="insert" parameterType="List">
+		insert into t_user_baseinfo (UserID, Password, NickName, 
+      BirthDay, Sex, RealName, 
+      PhoneNumber, Weixin, QQ, 
+      Mail, Province, City, 
+      Description, UserPic, BackGroundPIC, 
+      CreateTime)
+    values (#{userid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{userpic,jdbcType=VARCHAR}, #{backgroundpic,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+      </insert>
+      
+    <select id="selectMaxId" resultType="String">
+        select max(UserID) from t_user_baseinfo
+    </select>
+<!--     选择一条数据 -->
+    <select id="selectOne" parameterType="Map" resultMap="baseMapper.appUserBaseDtoMap">
+        select 
+       UserID, Password, NickName, BirthDay, Sex, RealName, PhoneNumber, Weixin, QQ, Mail, 
+       Province, City, Description, UserPic, BackGroundPIC, CreateTime
+        from t_user_baseinfo
+       <where>
+        Userid=#{searchDto.userid,jdbcType=VARCHAR}
+       </where>
+    </select>
+<!--     查找多条数据-->
+    <select id="selectList" parameterType="Map" resultMap="baseMapper.appUserBaseDtoMap">
+       
+        select 
+        UserID, Password, NickName, BirthDay, Sex, RealName, PhoneNumber, Weixin, QQ, Mail, 
+        Province, City, Description, UserPic, BackGroundPIC, CreateTime
+        from t_user_baseinfo
+       <where>
+	       <trim prefixOverrides="and">
+	       		<if test="searchDto.userid!=null and searchDto.userid!=''">
+		          and  userid =#{searchDto.userid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.nickname!=null and searchDto.nickname!=''">
+		          and  nickname like CONCAT('%',#{searchDto.nickname,jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="searchDto.nickname!=null and searchDto.nickname!=''">
+		          and  phonenumber like CONCAT('%',#{searchDto.phonenumber,jdbcType=VARCHAR},'%')
+		        </if>
+		        
+	        </trim>
+       </where>
+       <if test="searchDto.page!=null">
+          limit  #{searchDto.page.startIndex}, #{searchDto.page.pageSize}
+       </if>
+    </select>
+<!--     更新一条数据 -->
+    <update id="update" parameterType="appUserBaseDto">
+        update t_user_baseinfo
+              set 
+              <trim suffixOverrides=",">
+	          <if test="password!=null and password!=''">
+	           password = #{password,jdbcType=VARCHAR},
+	          </if>
+	          <if test="nickname!=null and nickname!=''">
+	           nickname = #{nickname,jdbcType=VARCHAR},
+	          </if> 	          
+	          <if test="birthday!=null and birthday!=''">
+	             birthday =  #{birthday,jdbcType=VARCHAR},
+	          </if> 
+	          <if test="sex!=null and sex!=''">
+	             sex =  #{sex,jdbcType=VARCHAR},
+	          </if>
+	          <if test="realname!=null and realname!=''">
+	             realname =  #{realname,jdbcType=VARCHAR},
+	          </if>
+	          <if test="phonenumber!=null and phonenumber!=''">
+	             phonenumber =  #{phonenumber,jdbcType=VARCHAR},
+	          </if>
+	          <if test="weixin!=null and weixin!=''">
+	             weixin =  #{weixin,jdbcType=VARCHAR},
+	          </if>
+	          <if test="qq!=null and qq!=''">
+	             qq =  #{qq,jdbcType=VARCHAR},
+	          </if>
+	          <if test="mail!=null and mail!=''">
+	             mail =  #{mail,jdbcType=VARCHAR},
+	          </if>
+	          <if test="province!=null and province!=''">
+	             province =  #{province,jdbcType=VARCHAR},
+	          </if>
+	          <if test="city!=null and city!=''">
+	             city =  #{city,jdbcType=VARCHAR},
+	          </if>
+	          <if test="description!=null and description!=''">
+	             description =  #{description,jdbcType=VARCHAR},
+	          </if>
+	          <if test="userpic!=null and userpic!=''">
+	             userpic =  #{userpic,jdbcType=VARCHAR},
+	          </if>
+	          <if test="backgroundpic!=null and backgroundpic!=''">
+	             backgroundpic =  #{backgroundpic,jdbcType=VARCHAR},
+	          </if>
+	           <if test="createtime!=null and createtime!=''">
+	           createtime = #{createtime,jdbcType=TIMESTAMP},
+	          </if>    
+          </trim>         
+            where    userid = #{userid,jdbcType=VARCHAR}
+    </update>
+<!--     删除已条数据 -->
+    <delete id="deleteById" parameterType="appUserBaseDto">
+       delete from  t_user_baseinfo where userid=#{userid,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="count" parameterType="Map" resultType="int">
+        select count(*) from  t_user_baseinfo
+         <where>
+            <trim prefixOverrides="and">
+	       		<if test="searchDto.userid!=null and searchDto.userid!=''">
+		          and  userid =#{searchDto.userid,jdbcType=VARCHAR}
+		        </if>
+		        <if test="searchDto.nickname!=null and searchDto.nickname!=''">
+		          and  nickname like CONCAT('%',#{searchDto.nickname,jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="searchDto.nickname!=null and searchDto.nickname!=''">
+		          and  phonenumber like CONCAT('%',#{searchDto.phonenumber,jdbcType=VARCHAR},'%')
+		        </if>
+		        
+	        </trim>
+       </where>
+        
+       
+       
+    </select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cdChannelMapper">
+    <resultMap type="cdChannelDto" id="cdChannelDtoMap" extends="baseMapper.cdChannelBaseDtoMap">
+       <result column="checked" property="checked" jdbcType="VARCHAR" />
+    </resultMap>
+     <select id="selectList" parameterType="Map" resultMap="cdChannelDtoMap">
+        select distinct c.* from cd_channel c
+         <if test="searchDto!=null and searchDto.newDepCode!=null  and searchDto.newDepCode!=''">
+            inner join cc_depchannel d on d.channelcode=c.channelcode
+         </if>
+          <if test="searchDto!=null and searchDto.dempList!=null  and searchDto.dempList.size!=0">
+            inner join cc_depchannel d on d.channelcode=c.channelcode
+         </if>
+         <where>
+            <trim prefixOverrides="and">
+                <if test="searchDto!=null and searchDto.newDepCode!=null  and searchDto.newDepCode!=''">
+                  and  d.department=#{searchDto.newDepCode}
+                </if>
+                 <if test="searchDto!=null and searchDto.dempList!=null  and searchDto.dempList.size!=0">
+                    and  d.department in 
+                    <foreach collection="searchDto.dempList" item="depcode" open="(" separator="," close=")">
+                       #{depcode}
+                    </foreach>
+                </if>
+            </trim>
+         </where>
+     </select>
+     
+     <!--获取渠道List（包含勾选） -->
+	<select id="selectListChecked" parameterType="Map" resultMap="cdChannelDtoMap">
+		select m.*,a.checked from cd_channel m
+		left join (select 1 as checked,channelcode from cc_depchannel where
+		department=#{searchDto.newDepCode,jdbcType=VARCHAR}) a 
+		on m.channelcode = a.channelcode
+     </select>
+     
+     
+     
+     
+     
+     
+     
+</mapper>

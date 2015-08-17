@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="daq" namespace="/daq" extends="risk-struts-default">
+        <!--数据采集管理 -->
+		<!--手工填报管理-->
+		<action name="di_*" class="dataInputAction" method="{1}">
+			<result name="list">/newrisk/jsp/daq/handinput/dataInput.jsp</result>
+			<result name="submit" type="redirect">/daq/di_list.do?searchDto.statDate=${searchDto.statDate}</result>
+			<result name="query">/risk/jsp/daq/queryDataInput.jsp</result>
+			<result name="inport" type="redirect">/daq/di_list.do?searchDto.statDate=${searchDto.statDate}&amp;resmessage=${resmessage}</result>
+			<result name="getGroupInputData">/newrisk/jsp/daq/handinput/windDataInport.jsp</result>
+			<result name="exportAjaxPage">/newrisk/jsp/daq/handinput/windDataExport.jsp</result>
+		    <result name="export" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${downFileName}.xls</param>
+                <param name="bufferSize">80000</param>
+            </result>
+		</action>
+		<!--因子数据状态查询、运算结果状态查询-->
+		<action name="dsc_*" class="dataStateCheckAction" method="{1}">
+			<result name="handFactorList">/newrisk/jsp/daq/statequery/handFactorList.jsp</result><!-- 手工因子状态 --> 
+			<result name="sudoDataList">/newrisk/jsp/daq/statequery/sudoDataList.jsp</result><!-- 系统因子状态 --> 
+			<result name="classStateList">/newrisk/jsp/daq/statequery/handClassFactorList.jsp</result>
+			<result name="operationList">/newrisk/jsp/daq/statequery/operationList.jsp</result>
+			
+			<result name="operationPage">/newrisk/jsp/daq/statequery/checkFactorStatus.jsp</result>
+			<result name="updateFillState" type="redirect">/daq/dsc_factorStateList.do?searchDto.datafromtype=1&amp;searchDto.statDate=${searchDto.statDate}&amp;searchDto.newDepCode=${searchDto.newDepCode}</result>
+			<result name="updateClassState" type="redirect">/daq/dsc_classStateList.do?searchDto.datafromtype=1&amp;searchDto.statDate=${searchDto.statDate}&amp;searchDto.newDepCode=${searchDto.newDepCode}</result>
+			<result name="resetFileState" type="redirect">/daq/dsc_factorStateList.do?searchDto.datafromtype=1&amp;searchDto.statDate=${searchDto.statDate}&amp;searchDto.newDepCode=${searchDto.newDepCode}</result>
+			<result name="classResetFillState" type="redirect">/daq/dsc_classStateList.do?searchDto.datafromtype=1&amp;searchDto.statDate=${searchDto.statDate}&amp;searchDto.newDepCode=${searchDto.newDepCode}</result>
+		</action>
+		
+		<!--基础数据查询-->
+		<action name="bdq_*" class="basicsDataAction" method="{1}">
+			<result name="list">/newrisk/jsp/daq/dataquery/dataQuery.jsp</result>
+		</action>
+		<!--数据报送-->
+		<action name="dsumit_*" class="dataSubmitAction" method="{1}">
+			<result name="classList">/newrisk/jsp/daq/datasubmit/classSubManage.jsp</result>
+			 <result name="downfile" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${filename}.xls</param>
+                <param name="bufferSize">80000</param>
+            </result>
+			<result name="groupPage">/newrisk/jsp/daq/datasubmit/groupSubManage.jsp</result>
+			
+			<result name="groupList">/newrisk/jsp/daq/datasubmit/groupSubmitManList.jsp</result>
+			<result name="groupListZongHeChengBei">/newrisk/jsp/daq/datasubmit/groupSubmitManListZongHeChengBei.jsp</result>
+			
+			<result name="riskPage">/newrisk/jsp/daq/datasubmit/riskSubManage.jsp</result>
+			 <result name="riskListDown" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">riskInputStream</param>
+                <param name="contentDisposition">attachment;filename=${filename}</param>
+                <param name="bufferSize">80000</param>
+            </result>
+		</action>
+		<!--模型数据-->
+		<action name="md_*" class="modelDataAction" method="{1}">
+		    <result name="list">/newrisk/jsp/daq/modeldata/modelDataList.jsp</result>
+		     <result name="listDown">/newrisk/jsp/daq/modeldata/down/modelDataDownList.jsp</result>
+		    <result name="down" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${downFileName}.xls</param>
+                <param name="bufferSize">80000</param>
+            </result>
+            <result name="downU" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">inputStreamU</param>
+                <param name="contentDisposition">attachment;filename=${downFileName}</param>
+                <param name="bufferSize">80000</param>
+            </result>
+            <result name="delete" type="redirect">/daq/md_list.do?searchDto.statDate=${searchDto.statDate}</result>
+		</action>
+	</package>
+</struts>

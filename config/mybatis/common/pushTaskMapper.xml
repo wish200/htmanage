@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pushTaskMapper">
+    <resultMap type="pushTaskDto" id="pushTaskDtoMap">
+       <result column="comcode" property="comcode" jdbcType="VARCHAR"/>
+       <result column="statdate" property="statdate" jdbcType="VARCHAR"/>
+       <result column="maindepmentcode" property="maindepmentcode" jdbcType="VARCHAR"/>
+       <result column="taskcode" property="taskcode" jdbcType="VARCHAR"/> 
+       <result column="acceptorcode" property="acceptorcode" jdbcType="VARCHAR"/> 
+    </resultMap>
+    <!--查询 任务推送表中的超过提醒时间的 -->
+	<select id="selectList" parameterType="Map" resultMap="pushTaskDtoMap">
+		SELECT * FROM (SELECT c.indexname,m.comcode,m.maindepmentcode,m.acceptorcode, to_char(m.statdate,'yyyyMM') as statdate, m.backnums,m.taskcode,m.indexcode,m.backrate,m.pushdate,m.counts,add_months(m.pushdate,m.counts*m.backrate) as timea  FROM  
+  ( SELECT t.statdate,t.acceptorcode,t.comcode,t.maindepmentcode,t.taskcode,t.indexcode,(case t.backrate  when 'M' THEN 1
+        when 'Q' THEN 3  when 'H' THEN 6 
+        when 'Y' THEN 12 END) as backrate,t.pushdate,t.backnums,
+          trunc(months_between(sysdate,t.pushdate)/(case t.backrate  when 'M' THEN 1
+        when 'Q' THEN 3  when 'H' THEN 6 
+        when 'Y' THEN 12 END)) as counts  FROM flow_indextask  t where t.changestate != '5'
+   and t.backrate != '5')  m  left join cd_index c on c.indexcode=m.indexcode) where counts>backnums and TRUNC(sysdate-timea) between 0 and  2
+	</select>
+	<select id="selectList5Day" parameterType="Map" resultMap="pushTaskDtoMap">
+        SELECT *  FROM flow_indextask i where TRUNC(sysdate- i.pushdate)=5 and i.backnums='0'
+    </select>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="appFirstPageDaoMapper">
+	<insert id="insert" parameterType="List">
+		insert into t_firstpage (ID, PicUrl, CreateTime, Status)
+        values (#{id,jdbcType=INTEGER}, #{picurl,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+      </insert>
+      
+    <select id="selectMaxId" resultType="String">
+        select max(ID) from t_firstpage
+    </select>
+<!--     选择一条数据 -->
+    <select id="selectOne" parameterType="Map" resultMap="baseMapper.appFirstPageBaseDtoMap">
+        select 
+       ID, PicUrl, CreateTime, Status from t_firstpage
+       <where>
+        id=#{searchDto.id,jdbcType=VARCHAR}
+       </where>
+    </select>
+<!--     查找多条数据-->
+    <select id="selectList" parameterType="Map" resultMap="baseMapper.appFirstPageBaseDtoMap">
+        select  ID, PicUrl, CreateTime, Status from t_firstpage 
+       <where>
+	       <trim prefixOverrides="and">
+	       		<if test="searchDto.id!=null and searchDto.id!=''">
+		          and  id =#{searchDto.id,jdbcType=VARCHAR}
+		        </if>
+		        
+		        <if test="searchDto.validstate!=null and searchDto.validstate!=''">  
+		         	and status =#{searchDto.validstate,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+       <if test="searchDto.page!=null">
+          limit  #{searchDto.page.startIndex}, #{searchDto.page.pageSize}
+       </if>
+    </select>
+<!--     更新一条数据 -->
+    <update id="update" parameterType="appFirstPageBaseDto">
+        update t_firstpage
+              set 
+              <trim suffixOverrides=",">
+	          <if test="picurl!=null and picurl!=''">
+	           picurl = #{picurl,jdbcType=VARCHAR},
+	          </if>
+	           <if test="createtime!=null and createtime!=''">
+	           createtime = #{createtime,jdbcType=TIMESTAMP},
+	          </if>  
+	          <if test="status!=null and status!=''">
+	            status =#{status,jdbcType=VARCHAR},
+	          </if>     
+          </trim>         
+            where    id = #{id,jdbcType=VARCHAR}
+    </update>
+<!--     删除已条数据 -->
+    <delete id="deleteById" parameterType="appFirstPageBaseDto">
+       delete from  t_firstpage where id=#{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="count" parameterType="Map" resultType="int">
+        select count(*) from  t_firstpage
+         <where>
+            <trim prefixOverrides="and">
+	       		<if test="searchDto.id!=null and searchDto.id!=''">
+		          and  id =#{searchDto.id,jdbcType=VARCHAR}
+		        </if>
+		        
+		        <if test="searchDto.validstate!=null and searchDto.validstate!=''">  
+		         	and status =#{searchDto.validstate,jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+       </where>
+        
+       
+       
+    </select>
+</mapper>

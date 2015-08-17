@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ccMailSendRecorMapper">
+	<resultMap type="ccMailSendRecordDto" id="ccMailSendRecordDtoMap"
+		extends="baseMapper.ccMailSendRecordBaseDtoMap">
+		 <result column="functionName" property="functionName" jdbcType="VARCHAR" />
+		 <result column="moduleName" property="moduleName" jdbcType="VARCHAR" />
+	     <result column="comname" property="comName" jdbcType="VARCHAR" />
+	     <result column="depname" property="depName" jdbcType="VARCHAR" />
+	 <collection property="ccMailReceiverBaseDtos" resultMap="baseMapper.ccMailReceiverBaseDtoMap"></collection>
+	</resultMap>
+	<select  id="selectList" parameterType="Map" resultMap="ccMailSendRecordDtoMap">
+	    <if test="searchDto.page!=null">
+	       SELECT  kj.*,b.*,bu.username,br.senderid,br.usertype FROM (
+              SELECT * FROM
+            (
+            SELECT A.*, ROWNUM RN
+            FROM (  SELECT * FROM (
+         </if>  
+	           SELECT  distinct k.templatecatname as functionName,o.templatecatname as moduleName,
+	           S.senddate,
+				c.comname,d.depname,<!-- u.username, -->
+				 s.mailid <!-- ,r.senderid,r.usertype  --> FROM cc_mail_send_record s 
+				left join cc_mail_receiver r on s.mailid=r.mailid 
+				left join cc_user u on u.usercode=r.senderid
+				left join cd_templatecatno o on o.templatecatno=s.modtype
+				left join cd_templatecatno k on o.fathercode=k.templatecatno
+				left join cd_company c on c.comcode=s.comcode
+				left join cc_department d on d.newdepcode=s.department
+				    where 1=1 
+				    <if test="searchDto.comCode!=null and searchDto.comCode!=''">
+				      and s.comcode= #{searchDto.comCode,jdbcType=VARCHAR}
+				    </if>
+				     <if test="searchDto.newDepCode!=null and searchDto.newDepCode!=''">
+                      and s.department= #{searchDto.newDepCode,jdbcType=VARCHAR}
+                    </if>
+                    <if test="searchDto.userName!=null and searchDto.userName!='' ">
+                         and u.username  like '%'||#{searchDto.userName,jdbcType=VARCHAR}||'%'
+                    </if>
+                    <if test="searchDto.startDate!=null">
+                        and s.senddate between #{searchDto.startDate,jdbcType=TIMESTAMP}
+                            and 
+                            <choose>
+                                <when test="searchDto.endDate!=null">#{searchDto.endDate,jdbcType=TIMESTAMP}</when>
+                                <otherwise> sysdate</otherwise>
+                            </choose>
+                    </if>
+               
+	    <if test="searchDto.page!=null">
+         )KF ORDER BY KF.senddate desc) A) WHERE RN BETWEEN #{searchDto.page.startIndex} AND #{searchDto.page.endIndex}
+         ) B left join cc_mail_receiver br on br.mailid=b.mailid left join cc_user bu on bu.usercode=br.senderid
+          left join  cc_mail_send_record kj
+          on kj.mailid=b.mailid
+         order by kj.senddate desc
+         </if>
+	</select>
+	<!--用户的个数-->
+    <select id="count" parameterType="Map" resultType="int">
+    SELECT count(*) from (
+	    SELECT  distinct k.templatecatname as functionName,o.templatecatname as moduleName,
+                c.comname,d.depname,<!-- u.username, -->
+                s.mailid<!-- ,r.senderid,r.usertype  --> FROM cc_mail_send_record s 
+                left join cc_mail_receiver r on s.mailid=r.mailid 
+                left join cc_user u on u.usercode=r.senderid
+                left join cd_templatecatno o on o.templatecatno=s.modtype
+                left join cd_templatecatno k on o.fathercode=k.templatecatno
+                left join cd_company c on c.comcode=s.comcode
+                left join cc_department d on d.newdepcode=s.department
+                    where 1=1 
+                    <if test="searchDto.comCode!=null and searchDto.comCode!=''">
+                      and s.comcode= #{searchDto.comCode,jdbcType=VARCHAR}
+                    </if>
+                     <if test="searchDto.newDepCode!=null and searchDto.newDepCode!=''">
+                      and s.department= #{searchDto.newDepCode,jdbcType=VARCHAR}
+                    </if>
+                    <if test="searchDto.userName!=null and searchDto.userName!='' ">
+                         and u.username  like '%'||#{searchDto.userName,jdbcType=VARCHAR}||'%'
+                    </if>
+                    <if test="searchDto.startDate!=null">
+                        and s.senddate between #{searchDto.startDate,jdbcType=TIMESTAMP}
+                            and 
+                            <choose>
+                                <when test="searchDto.endDate!=null">#{searchDto.endDate,jdbcType=TIMESTAMP}</when>
+                                <otherwise> sysdate</otherwise>
+                            </choose>
+                    </if>)
+    </select>
+    <!--     插入模板信息 -->
+    <insert id="insertMailSendRecordBase" parameterType="CcMailSendRecordBaseDto">
+       insert into cc_mail_send_record
+     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modtype != null" >
+        modtype,
+      </if>
+      <if test="emaildetail != null" >
+        emaildetail,
+      </if>
+      <if test="mailid != null" >
+        mailid,
+      </if>
+      <if test="attadress != null" >
+        attadress,
+      </if>
+      <if test="comcode != null" >
+        comcode,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="sendperson != null" >
+        sendperson,
+      </if>
+      <if test="senddate != null" >
+        senddate,
+      </if>
+      <if test="emailthe != null" >
+        emailthe,
+      </if>
+     <!--  <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="templatecatno != null" >
+        TEMPLATECATNO,
+      </if>
+      <if test="templatecatname != null" >
+        TEMPLATECATNAME,
+      </if>
+      <if test="moduleid != null" >
+        moduleid,
+      </if>
+      <if test="modulename != null" >
+        modulename,
+      </if>
+      <if test="comcode != null" >
+        comcode,
+      </if> -->
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modtype != null" >
+        #{modtype,jdbcType=VARCHAR},
+      </if>
+       <if test="emaildetail != null" >
+        #{emaildetail,jdbcType=CLOB},
+      </if>
+      <if test="mailid != null" >
+        #{mailid,jdbcType=VARCHAR},
+      </if>
+      <if test="attadress != null" >
+        #{attadress,jdbcType=VARCHAR},
+      </if>
+      <if test="comcode != null" >
+        #{comcode,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="sendperson != null" >
+        #{sendperson,jdbcType=VARCHAR},
+      </if>
+      <if test="senddate != null" >
+        #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailthe != null" >
+        #{emailthe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    </insert>
+    <!-- 插入 因子_手工表 数据 -->
+    <insert id="insertListSendRecord" parameterType="List">
+        insert into cc_mail_send_record
+       (modtype, emaildetail, mailid, attadress, comcode, department, sendperson, senddate, emailthe)
+        (
+        <foreach collection="list" item="item" index="index"
+            separator="union all">
+            select
+            #{item.modtype,jdbcType=VARCHAR},#{item.emaildetail,jdbcType=CLOB},
+            #{item.mailid,jdbcType=VARCHAR},#{item.attadress,jdbcType=VARCHAR},
+            #{item.comcode,jdbcType=VARCHAR},#{item.department,jdbcType=VARCHAR},
+            #{item.sendperson,jdbcType=VARCHAR},#{item.senddate,jdbcType=TIMESTAMP}
+            ,#{item.emailthe,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        )
+    </insert>
+    <!-- 插入 因子_手工表 数据 -->
+    <insert id="insertListReceiver" parameterType="List">
+        insert into cc_mail_receiver
+         (mailid, senderid, usertype)(
+        <foreach collection="list" item="item" index="index"
+            separator="union all">
+            select
+            #{item.mailid,jdbcType=VARCHAR},#{item.senderid,jdbcType=VARCHAR},
+            #{item.usertype,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        )
+    </insert>
+    
+</mapper>
